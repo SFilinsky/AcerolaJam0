@@ -1,0 +1,229 @@
+<mxfile host="Electron" modified="2024-03-01T19:25:22.452Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="wkccfLLX1VeUFLv_c9B1" version="23.1.5" type="device">
+  <diagram name="Page-1" id="owv8p-Lf1dp_q_vDyG9w">
+    <mxGraphModel dx="4286" dy="2585" grid="0" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0gpyr5pIwed21yI04qNp-7" value="DataAsset_LevelSequence" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-480" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-13" value="F_PC_SoundtrackManager" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="-920" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-21" value="Interfaces to trigger will be found by tag, so there is no direct dependency on features" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="2080" y="-480" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-25" value="IC_RewindCheckpointEvent" style="rounded=1;whiteSpace=wrap;html=1;glass=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-920" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-26" value="Rhythm Subsystem" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="-480" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-28" value="F_PC_TriggerCheckpointRewind" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="-840" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-29" value="F_A_TouchMe" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="-760" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-31" value="Checks if you are near object on timing" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="-760" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-32" value="Resets game to the last checkpoint on keypress" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="-850" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-33" value="Controls soundtrack flow" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="-930" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-34" value="Loads level, beat configuration, triggers scheduled events on beats." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="320" y="-490" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-35" value="F_A_Repulsion" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="-680" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-38" value="Creates repulsion force when player is near" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="-680" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-39" value="IC_ScheduledEvent" style="rounded=1;whiteSpace=wrap;html=1;glass=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-1000" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-40" value="Feature Components" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="-1080" width="430" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-41" value="Event Interfaces" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="1890" y="-1080" width="430" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-42" value="IC_NewCheckpointEvent" style="rounded=1;whiteSpace=wrap;html=1;glass=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-820" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-43" value="Notifies features about new event that is triggered. &lt;br&gt;Events to trigger are configured in LevelSchedule data asset using tags." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1960" y="-1015" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-44" value="Notifies features that checkpoint was reset" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1960" y="-920" width="250" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-45" value="Overall Notes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="320" y="-1080" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-46" value="All the game features should not be aware of tempo, rythm and beats they are activated at.&lt;br&gt;This aspect should only be handled by RhythmManager Feature." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="-920" width="360" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-49" value="- Rewind Duration" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-870" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-52" value="- TimeSinceStart" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-770" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-53" value="Notifies that specific moment in time is designated new checkpoint." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1960" y="-820" width="250" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-55" value="Data Assets" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="1890" y="-560" width="430" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-56" value="Content Assets" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="2750" y="-1080" width="430" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-57" value="Player Character" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2640" y="-1000" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-58" value="Level Toolkit" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2640" y="-920" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-59" value="Non-gameplay items" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2640" y="-600" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-60" value="Gameplay Objectives" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2640" y="-680" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-61" value="Movable Platforms" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2875" y="-760" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-62" value="Gates" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2875" y="-840" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-63" value="Level is built based on grid-based asset toolset I&#39;ll prepare." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="-850" width="360" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-64" value="Implementation plan" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="-976" y="-1078" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-66" target="0gpyr5pIwed21yI04qNp-67" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-66" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;February 29 - Idea generation&lt;/font&gt;&lt;br&gt;&lt;br&gt;Idea documented, overall vision of setting, game duration, win conditions, game flow is clear;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1670" y="-990" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-67" target="0gpyr5pIwed21yI04qNp-68" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-67" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;March 1 - &lt;/font&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Scope of the work should be mostly clear, plan created&lt;/font&gt;&lt;br&gt;&lt;br&gt;Game design and implementation docs, Level toolkit;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1670" y="-830" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-68" target="0gpyr5pIwed21yI04qNp-70" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-68" value="March 2 - Player should be able to formaly finish the game&lt;br&gt;&lt;br&gt;Basic level layout; TouchMe Feature; First pickable item; Win Conditions;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1670" y="-670" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-70" target="0gpyr5pIwed21yI04qNp-72" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-70" value="March 3 - Level starts based on asset;&lt;br&gt;Events are activated based on Schedule;&lt;br&gt;&lt;br&gt;Level Schedule Data Asset;&amp;nbsp; Rhythm Subsystem; IC_ScheduledEvent;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1670" y="-510" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-72" target="0gpyr5pIwed21yI04qNp-84" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-72" value="March 4 - Interactive level elements;&lt;br&gt;&lt;br&gt;Interfactive level elements should be implemented and interact with ScheduledEvents;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1670" y="-350" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-75" value="Interactive level elements" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2640" y="-800" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-82" value="First week - Game design and implementation" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="-1450" y="-1060" width="360" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-83" value="Second week - Visuals and polishing gameplay" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="-610" y="-1060" width="360" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="0gpyr5pIwed21yI04qNp-84" target="0gpyr5pIwed21yI04qNp-88" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1190" y="-930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-84" value="March 5 - Checkpoints introduced and can be rewinded&lt;br&gt;&lt;br&gt;Basic rewind - player is teleported back to where they were; Some interactables and items are reset to initial state for this checkpoint;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1670" y="-190" width="360" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-107" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-88" target="0gpyr5pIwed21yI04qNp-104" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-88" value="March 6 - Rough Soundtrack&lt;br&gt;&lt;br&gt;At this point rhythmic part of soundtrack should be drafted so game design can be worked though around it.&amp;nbsp;&lt;i&gt;&lt;font color=&quot;#696969&quot;&gt;It will be mixed later.&lt;/font&gt;&lt;/i&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1240" y="-990" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-92" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="0gpyr5pIwed21yI04qNp-90" target="0gpyr5pIwed21yI04qNp-93" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1060" y="-670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-90" value="March 8 - Non-gameplay items with repulsion&lt;br&gt;&lt;br&gt;Non-gameplay items are created and are repulsed from player;&lt;br&gt;They are also added to level;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1240" y="-670" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="0gpyr5pIwed21yI04qNp-93" target="0gpyr5pIwed21yI04qNp-109" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-93" value="March 9 - (Optional, skip if no time) Advanced Rewind&lt;br&gt;&lt;br&gt;Items are not only reset to checkpoint state - their states are cached and rewound gradually over rewind duration." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1240" y="-510" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-94" value="All things in game have to be synchronised with beat. This means any visual or in any other way perceivable things should be scheduled in dedicated subsystem." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="-800" width="360" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-95" value="Subsystems" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="180" y="-560" width="430" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-96" value="- Level to load&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-400" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-97" value="- Soundtrack file to use" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-360" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-98" value="- Sequence of level events based on beats" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-280" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-99" value="- Tempo" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1760" y="-320" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-100" value="To reduce complexity and save time, those are restrictions:&lt;br&gt;- events are aligned to quarter beats&lt;br&gt;- tempo is fixed&amp;nbsp;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="480" y="-920" width="360" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-108" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="0gpyr5pIwed21yI04qNp-104" target="0gpyr5pIwed21yI04qNp-90" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-104" value="March 7 - Level is worked through; Playtest prod build;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Model objective items, design level, iterate in playtests&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-1240" y="-830" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-115" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="0gpyr5pIwed21yI04qNp-109" target="0gpyr5pIwed21yI04qNp-113" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-109" value="March 10 - Add VFX; Improve level toolset material&lt;br&gt;&lt;br&gt;Create player character material&lt;br&gt;&lt;br&gt;Add VFX to Rewind, Checkpoint creation, Repulsion (especially to things interacting with soundtrack beat)&lt;br&gt;&lt;br&gt;level toolset material&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-620" y="-990" width="360" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="0gpyr5pIwed21yI04qNp-113" target="0gpyr5pIwed21yI04qNp-116" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-113" value="March 11 -&amp;nbsp; Polish soundtrack&lt;br&gt;&lt;br&gt;Mix level soundtrack, write little ambient for menu" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-620" y="-760" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="0gpyr5pIwed21yI04qNp-116" target="0gpyr5pIwed21yI04qNp-120" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-440" y="-220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-116" value="March 12 - Do Game Menu, improve visuals&lt;br&gt;&lt;br&gt;&lt;div&gt;Implement simple welcome screen before game starts;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Improve lighting, depth of field fog, add ink shader;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-620" y="-560" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="0gpyr5pIwed21yI04qNp-120" value="March 12 - Extra time; Submit project to jam&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial; font-size: 40px;&quot;&gt;Done!&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=14;fillColor=default;glass=0;shadow=1;strokeColor=default;strokeWidth=0.25;spacingTop=5;spacing=10;spacingLeft=5;" parent="1" vertex="1">
+          <mxGeometry x="-620" y="-220" width="360" height="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
