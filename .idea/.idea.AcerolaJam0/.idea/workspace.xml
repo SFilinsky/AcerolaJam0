@@ -11,10 +11,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="580e14b4-bc1c-44f9-ad8c-1c4c17b3d3e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/MainLevel.umap" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docs/.$Plan.drawio.bkp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docs/Plan.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/BP_Barrier.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/BP_Doorway.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/BP_Floor.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/BP_LevelToolsetActor.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/BP_Ramp.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/BP_Wall.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/Box_376B3E9D.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/LevelToolset_Barrier.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/LevelToolset_Doorway.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/LevelToolset_Floor.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/LevelToolset_Ramp.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/LevelToolset_Wall.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/M_LevelToolset_Clouds.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/LevelToolset/noiseTexture.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/_GENERATED/SiarheiPC/Box_1EC58B2D.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/_GENERATED/SiarheiPC/Box_2523F377.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/_GENERATED/SiarheiPC/Box_376B3E9D.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/_GENERATED/SiarheiPC/Box_89CBD3F4.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/_GENERATED/SiarheiPC/Box_E85BA57F.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docs/.$Plan.drawio.dtmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AcerolaJam0/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AcerolaJam0/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AcerolaJam0.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/AcerolaJam0.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MainLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MainLevel.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/Plan.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/Plan.drawio" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +215,7 @@
       <updated>1709243143570</updated>
       <workItem from="1709243144269" duration="3718000" />
       <workItem from="1709250746321" duration="261000" />
-      <workItem from="1709310630489" duration="1828000" />
+      <workItem from="1709310630489" duration="6790000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit. Created empty UE5.3 project.">
       <option name="closed" value="true" />
@@ -219,7 +241,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709250965483</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Introduce plan diagram. Create MainLevel with basic lighting.">
+      <option name="closed" value="true" />
+      <created>1709321158311</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709321158311</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +262,7 @@
     <MESSAGE value="Initial commit. Created empty UE5.3 project." />
     <MESSAGE value="Introduce clear scripts.&#10;Copy GameplayKit plugin into the project.&#10;Install Game Features and Module Gameplay plugins." />
     <MESSAGE value="Introduce Git LFS for Content folder." />
-    <option name="LAST_COMMIT_MESSAGE" value="Introduce Git LFS for Content folder." />
+    <MESSAGE value="Introduce plan diagram. Create MainLevel with basic lighting." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce plan diagram. Create MainLevel with basic lighting." />
   </component>
 </project>
