@@ -45,6 +45,14 @@
 		{
 			"Name": "StaticMeshEditorModeling",
 			"Enabled": true
+		},
+		{
+			"Name": "Feature_OrbitingCamera",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_MouseMovement",
+			"Enabled": true
 		}
 	]
 }
