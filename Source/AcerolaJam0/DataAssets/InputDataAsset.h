@@ -30,7 +30,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Camera Turn")
 	float CameraInterpolationDelay = 0.3f;
 
+	
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Move To Point")
+	float MaxForceLDistance = 100.f;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Move To Point")
 	float GoingUpBoostAngle = 30.f;
 
@@ -42,5 +46,10 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Move To Point")
 	float ForcePerSecond = 1000.f;
+
+
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Camera Parallax")
+	float CameraParallaxAmplitude = 100.f;
 	
 };

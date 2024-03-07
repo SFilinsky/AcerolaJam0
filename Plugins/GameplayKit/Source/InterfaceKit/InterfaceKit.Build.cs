@@ -26,6 +26,7 @@ public class InterfaceKit : ModuleRules
 			new string[]
 			{
 				"Core",
+				"GameplayKit"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -40,7 +41,6 @@ public class InterfaceKit : ModuleRules
 				"SlateCore", 
 				"GameFeatures", 
 				"ModularGameplay", 
-                "GameplayKit"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

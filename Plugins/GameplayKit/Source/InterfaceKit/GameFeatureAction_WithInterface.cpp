@@ -190,8 +190,12 @@ void UGameFeatureAction_WithInterface::TryAddComponentsToInterfacedActor(UGKInte
 	
 	for (const FGameFeatureWithInterfaceConfig& Entry : ComponentList)
 	{
-
-		if (Entry.InterfaceClass != InterfaceComponent->GetClass())
+		if (!Entry.InterfaceClass.IsValid())
+		{
+			continue;
+		}
+		
+		if (!InterfaceComponent->IsA(Entry.InterfaceClass.Get()))
 		{
 			continue;
 		}

@@ -5,6 +5,7 @@
 
 #include "Feature_MouseMovementRuntimeModule.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 void UFACMouseMovement::MoveToPosition(FVector Position)
 {
@@ -39,12 +40,14 @@ void UFACMouseMovement::MoveToPosition(FVector Position)
 	}
 	
 	const auto ProjectedDirection = GetForceDirection(StartPointTransform, Position);
+	const auto ForceMagnitude = GetForceDistanceRatio(StartPointTransform, Position);
+	const auto AntiGravityForce = GetSlopeAdjustmentForce(StartPointTransform, Position);
+
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *AntiGravityForce.ToString());
 
 	DrawDebugLine(MovedPrimitive->GetWorld(),MovedPrimitive->GetComponentLocation(),MovedPrimitive->GetComponentLocation() + ProjectedDirection * 100, FColor::Green,false, 5.0f, 0, 1.0f);
-
-	UE_LOG(LogMouseMovement, Log, TEXT("%f"), ProjectedDirection.Length());
 	
-	MovedPrimitive->AddForce(ProjectedDirection * ForcePerSecond);
+	MovedPrimitive->AddForce(ProjectedDirection * ForcePerSecond * ForceMagnitude + AntiGravityForce * MovedPrimitive->GetMass());
 }
 
 FVector UFACMouseMovement::GetForceDirection(const FTransform& StartTransform, const FVector& TargetPosition)
@@ -66,16 +69,34 @@ FVector UFACMouseMovement::GetForceDirection(const FTransform& StartTransform, c
 	}
 	
 	return HorizontalDirection;
-	
-	// float TargetAngle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(HorizontalDirection, Direction)));
-	//
-	// FVector ForceDirection = Direction;
-	// if (TargetAngle > 5.f)
-	// {
-	// 	FVector RotationAxis = FVector::CrossProduct(StartUpDirection, HorizontalDirection).GetSafeNormal();
-	//
-	// 	ForceDirection = HorizontalDirection.RotateAngleAxis(MaxVerticalAngle, RotationAxis);
-	// }
-	//
-	// return ForceDirection;
 }
+
+
+float UFACMouseMovement::GetForceDistanceRatio(const FTransform& StartTransform, const FVector& TargetPosition)
+{
+	return FMath::Sqrt(0.01 + FMath::SmoothStep<float>(0.0f, MaxForceDistance, (StartTransform.GetLocation() - TargetPosition).Length()));
+}
+
+FVector UFACMouseMovement::GetSlopeAdjustmentForce(const FTransform& StartTransform, const FVector& TargetPosition)
+{
+	const auto World = GetWorld();
+	checkSlow(World);
+	
+	const FVector StartPosition = StartTransform.GetLocation();
+
+	FHitResult OutHit = FHitResult();
+	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartPosition, TargetPosition, ECC_Visibility, FCollisionQueryParams(FName(TEXT("")), false, GetOwner()));
+
+	if (!bHit)
+	{
+		return FVector::Zero();
+	}
+	
+	const FVector SurfaceNormal = OutHit.ImpactNormal;
+	const FVector Gravity = -FVector::UpVector * GetWorld()->GetGravityZ();
+
+	FVector AntiGravityForce = FVector::VectorPlaneProject(Gravity, SurfaceNormal);
+	
+	return AntiGravityForce;
+}
+

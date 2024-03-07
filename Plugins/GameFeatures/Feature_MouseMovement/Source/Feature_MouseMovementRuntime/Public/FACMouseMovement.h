@@ -23,11 +23,17 @@ public:
 protected:
 	
 	FVector GetForceDirection(const FTransform& TargetTransform, const FVector& Direction);
+	float GetForceDistanceRatio(const FTransform& TargetTransform, const FVector& Direction);
+	FVector GetSlopeAdjustmentForce(const FTransform& TargetTransform, const FVector& Direction);
 
 	/* State */
 
 protected:
 
+
+	UPROPERTY(BlueprintReadWrite)
+	float MaxForceDistance = 100.0f;
+	
 	UPROPERTY(BlueprintReadWrite)
 	float GoingUpBoostAngle = 30.f;
 	

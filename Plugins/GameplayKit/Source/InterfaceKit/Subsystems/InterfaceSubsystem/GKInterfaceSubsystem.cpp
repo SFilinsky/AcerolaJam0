@@ -136,12 +136,12 @@ TSharedPtr<FInterfaceExtensionHandle> UGKInterfaceSubsystem::AddExtensionHandler
 	return MakeShared<FInterfaceExtensionHandle>(this, InterfaceClass, DelegateHandle);
 }
 
-void UGKInterfaceSubsystem::NotifyInterfaceAddition(AActor* Actor, TSubclassOf<UGKInterfaceComponent> InterfaceClass)
+void UGKInterfaceSubsystem::NotifyInterfaceAddition(AActor* Actor, TSubclassOf<UGKInterfaceComponent> InterfaceClass)	
 {
 	if (!AllReceivers.Contains(Actor))
 	{
 		#if WITH_EDITOR
-			UE_LOG(LogInterfaceKit, Display, TEXT("%s: Interface %s was added to %s , but it's not registered as receiver."), *this->GetName(), *InterfaceClass->GetName(), *AActor::GetDebugName(Actor));
+			UE_LOG(LogInterfaceKit, Warning, TEXT("%s: Interface %s was added to %s , but it's not registered as receiver."), *this->GetName(), *InterfaceClass->GetName(), *AActor::GetDebugName(Actor));
 		#endif
 		
 		return;
@@ -206,6 +206,30 @@ void UGKInterfaceSubsystem::RemoveComponentFromActor(UActorComponent* ComponentI
 		// Mark the component for destruction
 		ComponentInstance->DestroyComponent();
 	}
+}
+
+TArray<UGKInterfaceComponent*> UGKInterfaceSubsystem::GetInterfaceClassInstances(
+	const TSoftClassPtr<UGKInterfaceComponent>& InterfaceClass)
+{
+	TArray<UGKInterfaceComponent*> InterfaceInstances;
+	for (const auto Receiver : AllReceivers)
+	{
+		const auto ReceiverInst = Receiver.Get();
+		if (ReceiverInst == nullptr)
+		{
+			continue;
+		}
+
+		const auto InterfaceInst = GetInterfaceIfImplements(ReceiverInst, InterfaceClass);
+		if (InterfaceInst == nullptr)
+		{
+			continue;
+		}
+		
+		InterfaceInstances.Add(InterfaceInst);
+	}
+
+	return InterfaceInstances;
 }
 
 void UGKInterfaceSubsystem::AddReceiverInternal(AActor* Receiver)
@@ -274,19 +298,32 @@ void UGKInterfaceSubsystem::TriggerHandlersForInterface(const AActor* Receiver, 
 	{
 		return;
 	}
-	
-	const auto HandlerMapPtr = InterfaceToExtensionHandlerMap.Find(FInterfaceClassPath(InterfaceClassPtr));
-	if (HandlerMapPtr == nullptr)
+
+	for (const auto Elem : InterfaceToExtensionHandlerMap)
 	{
-		return;
+
+		const auto MapInterface = Elem.Key.InterfaceClass;
+		if (!MapInterface.IsValid())
+		{
+			continue;
+		}
+
+		if (!InterfaceComponent->IsA(MapInterface.Get()))
+		{
+			continue;
+		}
+		
+		const auto HandlerMapPtr = Elem.Value;
+	
+		for (const auto& HandlerMapElem : HandlerMapPtr)
+		{
+			const auto Handler = HandlerMapElem.Value;
+	
+			Handler.Execute(InterfaceComponent, Event);
+		}
 	}
 	
-	for (const auto& HandlerMapElem : *HandlerMapPtr)
-	{
-		const auto Handler = HandlerMapElem.Value;
 	
-		Handler.Execute(InterfaceComponent, Event);
-	}
 }
 
 void UGKInterfaceSubsystem::CleanInvalidReceivers()

@@ -12,7 +12,8 @@
 				"Engine",
 				"CoreUObject",
 				"GameplayKit",
-				"ModularGameplay"
+				"ModularGameplay",
+				"InterfaceKit"
 			]
 		}
 	],
@@ -52,6 +53,34 @@
 		},
 		{
 			"Name": "Feature_MouseMovement",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_DisappearActor",
+			"Enabled": true
+		},
+		{
+			"Name": "Interface_Disappearable",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_BeatManager",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_SoundtrackManager",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_GameFinished",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_WinFadeout",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_CameraParallax",
 			"Enabled": true
 		}
 	]

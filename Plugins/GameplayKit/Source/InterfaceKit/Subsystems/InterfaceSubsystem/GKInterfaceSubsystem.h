@@ -94,7 +94,9 @@ public:
      * @param ComponentClass 
      */
 	static UActorComponent* CreateComponentOnActor(AActor* ActorInstance, TSubclassOf<UActorComponent> ComponentClass);
-	static void RemoveComponentFromActor(UActorComponent* ComponentInstance);	
+	static void RemoveComponentFromActor(UActorComponent* ComponentInstance);
+	
+	TArray<UGKInterfaceComponent*> GetInterfaceClassInstances(const TSoftClassPtr<UGKInterfaceComponent>& InterfaceClass); 
 	
 protected:
 	
@@ -121,6 +123,7 @@ protected:
 	void CleanInvalidReceivers();
 	
 	UGKInterfaceComponent* GetInterfaceIfImplements(const AActor* Actor, const TSoftClassPtr<UGKInterfaceComponent>& InterfaceClassPtr);
+
 	
 /* State */
 

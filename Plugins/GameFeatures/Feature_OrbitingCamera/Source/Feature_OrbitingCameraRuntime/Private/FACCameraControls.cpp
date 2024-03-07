@@ -35,6 +35,7 @@ void UFACCameraControls::BeginPlay()
 	{
 		auto CurrentComponentRotation = ControlledComponent->GetRelativeRotation().Yaw;
 		Position->SetCurrentValue(CurrentComponentRotation);
+		Position->SetTargetValue(CurrentComponentRotation);
 	}
 	
 	Super::BeginPlay();
