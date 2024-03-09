@@ -28,6 +28,10 @@
 		{
 			"Name": "Interface_GameFinished",
 			"Enabled": true
+		},
+		{
+			"Name": "GameplayKit",
+			"Enabled": true
 		}
 	]
 }

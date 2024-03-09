@@ -4,6 +4,7 @@
 #include "BeatSubsystem.h"
 
 #include "LevelTimeSubsystem.h"
+#include "AcerolaJam0/DataAssets/LevelScheduleDataAsset.h"
 #include "AcerolaJam0/Overrides/GMLevelBase.h"
 
 

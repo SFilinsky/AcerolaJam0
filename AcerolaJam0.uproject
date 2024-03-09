@@ -64,6 +64,10 @@
 			"Enabled": true
 		},
 		{
+			"Name": "Beat",
+			"Enabled": true
+		},
+		{
 			"Name": "Feature_BeatManager",
 			"Enabled": true
 		},
@@ -80,7 +84,19 @@
 			"Enabled": true
 		},
 		{
-			"Name": "Feature_CameraParallax",
+			"Name": "Feature_ActorRewind",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_PlayerRewindControls",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_CameraSpeedEffects",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_SoundtrackTimeCounter",
 			"Enabled": true
 		}
 	]

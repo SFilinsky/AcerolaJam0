@@ -1,2 +1,3 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=2c85a890_002D01d3_002D873d_002D8340_002D72ce7c62e50a_0023Feature_005FPlayerRewindControls/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=cc13e4f6_002D64a9_002Dcbb6_002Ddb21_002Decfde20b2050_0023Feature_005FSoundtrackManager/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

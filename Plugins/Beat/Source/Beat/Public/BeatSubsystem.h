@@ -3,18 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AcerolaJam0/DataAssets/LevelScheduleDataAsset.h"
+#include "LevelTimeSubsystem.h"
 #include "Subsystems/WorldSubsystem.h"
 #include "BeatSubsystem.generated.h"
 
-UENUM()
-enum EBeatDirection
-{
-	Positive,
-	Paused,
-	Negative
-};
-
+class ULevelScheduleDataAsset;
 
 USTRUCT(Blueprintable)
 struct FBeatInterval {
@@ -28,7 +21,7 @@ struct FBeatInterval {
 		End = 0;
 	}
 	
-	FBeatInterval(EBeatDirection DirectionValue, float StartValue, float EndValue)
+	FBeatInterval(ETimeDirection DirectionValue, float StartValue, float EndValue)
 	{
 		Direction = DirectionValue;
 		Start = StartValue;
@@ -36,7 +29,7 @@ struct FBeatInterval {
 	};
 
 	UPROPERTY(BlueprintReadOnly)
-	TEnumAsByte<EBeatDirection> Direction;
+	TEnumAsByte<ETimeDirection> Direction;
 	
 	UPROPERTY(BlueprintReadOnly)
 	float Start;

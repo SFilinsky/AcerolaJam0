@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GKActorComponent.h"
-#include "GameplayKit/Interpolator/ValueInterpolator.h"
 #include "FACCameraControls.generated.h"
+
+class UInterpolatorFloat;
 
 /**
  * 
@@ -14,7 +15,6 @@ UCLASS()
 class FEATURE_ORBITINGCAMERARUNTIME_API UFACCameraControls : public UGKActorComponent
 {
 	GENERATED_BODY()
-
 
 	UFACCameraControls();
 	
@@ -36,10 +36,11 @@ protected:
 	/* State */
 
 protected:
-
+	
+	UPROPERTY()
 	USceneComponent* ControlledComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UValueInterpolator* Position;
+	UInterpolatorFloat* Position;
 
 };

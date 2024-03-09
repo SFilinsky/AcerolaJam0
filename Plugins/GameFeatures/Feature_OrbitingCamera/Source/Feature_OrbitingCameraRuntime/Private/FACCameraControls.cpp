@@ -5,6 +5,7 @@
 
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GameplayKit/Interpolator/UInterpolatorFloat.h"
 
 UFACCameraControls::UFACCameraControls():
 	ControlledComponent(nullptr),
@@ -15,7 +16,7 @@ UFACCameraControls::UFACCameraControls():
 void UFACCameraControls::BeginPlay()
 {
 	
-	Position = NewObject<UValueInterpolator>(this);
+	Position = NewObject<UInterpolatorFloat>(this);
  
 	const auto Owner = GetOwner();
 
@@ -29,13 +30,6 @@ void UFACCameraControls::BeginPlay()
 		{
 			ControlledComponent = Pawn->GetComponentByClass<UCameraComponent>();
 		}
-	}
-
-	if (ControlledComponent != nullptr)
-	{
-		auto CurrentComponentRotation = ControlledComponent->GetRelativeRotation().Yaw;
-		Position->SetCurrentValue(CurrentComponentRotation);
-		Position->SetTargetValue(CurrentComponentRotation);
 	}
 	
 	Super::BeginPlay();
@@ -51,11 +45,13 @@ void UFACCameraControls::TickComponent(float DeltaTime, ELevelTick TickType,
 		return;
 	}
 
+	auto Rotation = ControlledComponent->GetComponentRotation();
+	
+	Rotation.Yaw -= Position->GetCurrentValue();
 	Position->Interpolate(DeltaTime);
-
-	auto Rotation = ControlledComponent->GetRelativeRotation();
-	Rotation.Yaw = Position->GetCurrentValue();
-	ControlledComponent->SetRelativeRotation(Rotation);
+	Rotation.Yaw += Position->GetCurrentValue();
+	
+	ControlledComponent->SetWorldRotation(Rotation);
 }
 
 void UFACCameraControls::AddTurn(float AngleDeg)

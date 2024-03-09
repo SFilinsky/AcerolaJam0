@@ -21,8 +21,6 @@ void UFGMBeatManager::BeginPlay()
 	
 	Schedule = LevelGameMode->GetLevelSchedule();
 	checkSlow(Schedule);
-
-	SetAsyncPhysicsTickEnabled(true);
 }
 
 void UFGMBeatManager::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -30,14 +28,6 @@ void UFGMBeatManager::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	TriggerEvents();
-}
-
-void UFGMBeatManager::AsyncPhysicsTickComponent(float DeltaTime, float SimTime)
-{
-	
-	Super::AsyncPhysicsTickComponent(DeltaTime, SimTime);
-
-	// TriggerEvents();
 }
 
 void UFGMBeatManager::TriggerEvents()

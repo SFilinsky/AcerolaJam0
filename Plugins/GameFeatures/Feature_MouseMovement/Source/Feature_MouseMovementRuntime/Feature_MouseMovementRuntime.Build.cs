@@ -25,8 +25,9 @@ public class Feature_MouseMovementRuntime : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core", 
+				"Core",
 				"GameplayKit",
+				"UMG"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

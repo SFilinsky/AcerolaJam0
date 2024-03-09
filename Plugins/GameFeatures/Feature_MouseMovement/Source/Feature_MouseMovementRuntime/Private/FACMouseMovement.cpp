@@ -5,7 +5,6 @@
 
 #include "Feature_MouseMovementRuntimeModule.h"
 #include "Components/BoxComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 void UFACMouseMovement::MoveToPosition(FVector Position)
 {
@@ -39,18 +38,25 @@ void UFACMouseMovement::MoveToPosition(FVector Position)
 		StartPointTransform.SetLocation(StartPointTransform.GetLocation() - FVector(0.0f, 0.0f, BoxCollider->GetScaledBoxExtent().Z));
 	}
 	
-	const auto ProjectedDirection = GetForceDirection(StartPointTransform, Position);
-	const auto ForceMagnitude = GetForceDistanceRatio(StartPointTransform, Position);
-	const auto AntiGravityForce = GetSlopeAdjustmentForce(StartPointTransform, Position);
-
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *AntiGravityForce.ToString());
-
-	DrawDebugLine(MovedPrimitive->GetWorld(),MovedPrimitive->GetComponentLocation(),MovedPrimitive->GetComponentLocation() + ProjectedDirection * 100, FColor::Green,false, 5.0f, 0, 1.0f);
+	const auto DirectionalAcceleration = GetDirectionalAcceleration(StartPointTransform, Position);
+	const auto DistanceRatio = GetAccelerationDistanceRatio(StartPointTransform, Position);
+	const auto SideBoostAcceleration = GetSideBoostAcceleration(StartPointTransform, Position, MovedPrimitive->GetPhysicsLinearVelocity());
 	
-	MovedPrimitive->AddForce(ProjectedDirection * ForcePerSecond * ForceMagnitude + AntiGravityForce * MovedPrimitive->GetMass());
+	const auto TotalAcceleration = DistanceRatio * (SideBoostAcceleration + DirectionalAcceleration);
+
+
+	DrawDebugLine(MovedPrimitive->GetWorld(),MovedPrimitive->GetComponentLocation(),MovedPrimitive->GetComponentLocation() + TotalAcceleration / 100, FColor::Green,false, 3.0f, 0, 0.75f);
+	
+	MovedPrimitive->AddForce(TotalAcceleration * MovedPrimitive->GetMass()); // We multiply for mass to get final force value; It will make mass to not impact acceleration at the end.
+
+
+	// Will soften gravity if target point is above current lowest point of actor
+	const auto AntiGravityAcceleration = GetVerticalAdjustmentAcceleration(StartPointTransform, Position);
+	MovedPrimitive->AddForce(AntiGravityAcceleration * MovedPrimitive->GetMass());
+	
 }
 
-FVector UFACMouseMovement::GetForceDirection(const FTransform& StartTransform, const FVector& TargetPosition)
+FVector UFACMouseMovement::GetDirectionalAcceleration(const FTransform& StartTransform, const FVector& TargetPosition)
 {
 	const FVector StartPosition = StartTransform.GetLocation();
 	const FVector StartUpDirection = StartTransform.GetRotation().GetUpVector();
@@ -61,42 +67,45 @@ FVector UFACMouseMovement::GetForceDirection(const FTransform& StartTransform, c
 	FVector HorizontalDirection = FVector::VectorPlaneProject(Direction, StartUpDirection);
 	HorizontalDirection.Normalize();
 	
-	bool bIsAbove = (TargetPosition.Z - StartPosition.Z) > 0.5f;
-	if (bIsAbove)
-	{
-		FVector RotationAxis = FVector::CrossProduct(StartUpDirection, HorizontalDirection).GetSafeNormal();
-		return HorizontalDirection.RotateAngleAxis(-GoingUpBoostAngle, RotationAxis) / GoingUpBoostScale;
-	}
-	
-	return HorizontalDirection;
+	return HorizontalDirection * AccelerationPerSecond;
 }
 
 
-float UFACMouseMovement::GetForceDistanceRatio(const FTransform& StartTransform, const FVector& TargetPosition)
+float UFACMouseMovement::GetAccelerationDistanceRatio(const FTransform& StartTransform, const FVector& TargetPosition)
 {
-	return FMath::Sqrt(0.01 + FMath::SmoothStep<float>(0.0f, MaxForceDistance, (StartTransform.GetLocation() - TargetPosition).Length()));
+	return FMath::Sqrt(0.01 + FMath::SmoothStep<float>(0.0f, MaxAccelerationDistance, (StartTransform.GetLocation() - TargetPosition).Length()));
 }
 
-FVector UFACMouseMovement::GetSlopeAdjustmentForce(const FTransform& StartTransform, const FVector& TargetPosition)
+FVector UFACMouseMovement::GetVerticalAdjustmentAcceleration(const FTransform& StartTransform, const FVector& TargetPosition)
 {
 	const auto World = GetWorld();
 	checkSlow(World);
-	
-	const FVector StartPosition = StartTransform.GetLocation();
 
-	FHitResult OutHit = FHitResult();
-	bool bHit = GetWorld()->LineTraceSingleByChannel(OutHit, StartPosition, TargetPosition, ECC_Visibility, FCollisionQueryParams(FName(TEXT("")), false, GetOwner()));
-
-	if (!bHit)
+	if (StartTransform.GetLocation().Z < TargetPosition.Z)
 	{
-		return FVector::Zero();
+		return -1 * GravityAdjustmentRatio * FVector::UpVector * World->GetGravityZ();
 	}
 	
-	const FVector SurfaceNormal = OutHit.ImpactNormal;
-	const FVector Gravity = -FVector::UpVector * GetWorld()->GetGravityZ();
+	return FVector::ZeroVector;
+}
 
-	FVector AntiGravityForce = FVector::VectorPlaneProject(Gravity, SurfaceNormal);
-	
-	return AntiGravityForce;
+FVector UFACMouseMovement::GetSideBoostAcceleration(const FTransform& StartTransform, const FVector& TargetPosition, const FVector& CurrentVelocity)
+{
+	const auto TargetDirection = TargetPosition - StartTransform.GetLocation();
+	const auto DirectionalDifference = GetDirectionalDifference(CurrentVelocity, TargetDirection);
+	const auto DirectionBoostRatio = FMath::Lerp(0, MaxDirectionalBoostRatio, DirectionalDifference); 
+	return TargetDirection.GetSafeNormal() * CurrentVelocity.Length() * DirectionBoostRatio;
+}
+
+float UFACMouseMovement::GetDirectionalDifference(const FVector& VecA, const FVector& VecB)
+{
+	const FVector NormalizedA = VecA.GetSafeNormal();
+	const FVector NormalizedB = VecB.GetSafeNormal();
+    
+	// Get the dot product, which ranges from -1 to 1
+	const float DotProd = FVector::DotProduct(NormalizedA, NormalizedB);
+
+	// Adjust the range from -1 -> 1 to 0 -> 1
+	return (1 - DotProd) / 2.0f;
 }
 

@@ -38,6 +38,8 @@ public class Feature_ActorRewindRuntime : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"GameplayKit", 
+				"LevelTime"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

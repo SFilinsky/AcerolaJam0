@@ -5,6 +5,12 @@
 
 #include "Kismet/GameplayStatics.h"
 
+void ULevelTimeSubsystem::OnWorldBeginPlay(UWorld& InWorld)
+{
+	Super::OnWorldBeginPlay(InWorld);
+
+}
+
 void ULevelTimeSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
@@ -22,8 +28,7 @@ void ULevelTimeSubsystem::Tick(float DeltaTime)
 	if (!World->IsPaused())
 	{
 		const float AdjustedDeltaTime = DeltaTime * TimeDirection;
-
-		CurrentTime += AdjustedDeltaTime;
+		CurrentTime = FMath::Max(0, CurrentTime + AdjustedDeltaTime);
 	}
 }
 
@@ -60,6 +65,14 @@ void ULevelTimeSubsystem::SetTimeModifier(float NewTimeModifier)
 	TimeDirection = FMath::Sign(NewTimeModifier);
 }
 
+float ULevelTimeSubsystem::GetTimeModifier()
+{
+	const auto World = GetWorld();
+	checkSlow(World);
+	
+	return TimeDirection * World->GetWorldSettings()->GetEffectiveTimeDilation();
+}
+
 float ULevelTimeSubsystem::GetCurrentTime()
 {
 	return CurrentTime;
@@ -74,7 +87,16 @@ float ULevelTimeSubsystem::GetAdjustedFrameDelta()
 	return Delta * TimeDirection;
 }
 
-float ULevelTimeSubsystem::GetTimeDirection()
+ETimeDirection ULevelTimeSubsystem::GetTimeDirection()
 {
-	return TimeDirection;
+	if (TimeDirection > 0)
+	{
+		return ETimeDirection::Positive;
+	}
+
+	if (TimeDirection < 0) {
+		return ETimeDirection::Negative;
+	}
+
+	return ETimeDirection::Paused;
 }

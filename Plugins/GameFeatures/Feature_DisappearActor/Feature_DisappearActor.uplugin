@@ -28,6 +28,10 @@
 		{
 			"Name": "Interface_Disappearable",
 			"Enabled": true
+		},
+		{
+			"Name": "GameplayKit",
+			"Enabled": true
 		}
 	]
 }

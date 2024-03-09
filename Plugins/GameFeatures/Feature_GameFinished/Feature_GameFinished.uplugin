@@ -32,6 +32,10 @@
 		{
 			"Name": "Interface_SoundtrackFinished",
 			"Enabled": true
+		},
+		{
+			"Name": "GameplayKit",
+			"Enabled": true
 		}
 	]
 }

@@ -25,7 +25,8 @@ public class Beat : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core",
+				"Core", 
+				"LevelTime", 
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -37,9 +38,9 @@ public class Beat : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"Slate",
-				"SlateCore", 
-				"AcerolaJam0",
-				"LevelTime"
+				"SlateCore",
+				"LevelTime",
+				"AcerolaJam0"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

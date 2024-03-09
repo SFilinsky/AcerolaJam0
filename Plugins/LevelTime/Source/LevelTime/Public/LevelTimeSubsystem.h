@@ -6,6 +6,15 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "LevelTimeSubsystem.generated.h"
 
+UENUM()
+enum ETimeDirection
+{
+	Positive = 1,
+	Paused = 0,
+	Negative = -1
+};
+
+
 /**
  * Manages level time to allow backwards time flow
  */
@@ -16,6 +25,10 @@ class LEVELTIME_API ULevelTimeSubsystem : public UTickableWorldSubsystem
 
 protected:
 
+	// static ULevelTimeSubsystem* Instance;
+	
+	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
+	
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Tick(float DeltaTime) override;
 
@@ -43,13 +56,16 @@ public:
 	void SetTimeModifier(float NewTimeModifier);
 
 	UFUNCTION(BlueprintCallable, Category="Time Flow")
+	float GetTimeModifier();
+	
+	UFUNCTION(BlueprintCallable, Category="Time Flow")
 	float GetCurrentTime();
 
 	UFUNCTION(BlueprintCallable, Category="Time Flow")
 	float GetAdjustedFrameDelta();
 
 	UFUNCTION(BlueprintCallable, Category="Time Flow")
-	float GetTimeDirection();
+	ETimeDirection GetTimeDirection();
 	
 	/* State */
 	

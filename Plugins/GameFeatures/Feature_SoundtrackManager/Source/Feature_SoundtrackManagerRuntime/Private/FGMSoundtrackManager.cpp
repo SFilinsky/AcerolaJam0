@@ -7,6 +7,7 @@
 #include "LevelTimeSubsystem.h"
 #include "AcerolaJam0/DataAssets/LevelScheduleDataAsset.h"
 #include "AcerolaJam0/Overrides/GMLevelBase.h"
+#include "Components/AudioComponent.h"
 #include "InterfaceKit/Subsystems/InterfaceSubsystem/GKInterfaceSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -27,8 +28,17 @@ void UFGMSoundtrackManager::BeginPlay()
 	checkSlow(World);
 
 	const auto LoadedSoundtrack = Schedule->SoundtrackFile.LoadSynchronous();
+	const auto LoadedRewindSoundtrack = Schedule->SoundtrackFile.LoadSynchronous();
+	if (!ensure(LoadedSoundtrack != nullptr) || !ensure(LoadedRewindSoundtrack != nullptr))
+	{
+		DestroyComponent();
+		return;
+	}
 	
-	UGameplayStatics::PlaySound2D(World, LoadedSoundtrack);
+	Soundtrack = UGameplayStatics::CreateSound2D(World, LoadedSoundtrack);
+	Soundtrack->bAutoDestroy = false;
+	RewindSoundtrack = UGameplayStatics::CreateSound2D(World, LoadedRewindSoundtrack);
+	RewindSoundtrack->bAutoDestroy = false;
 }
 
 void UFGMSoundtrackManager::TickComponent(float DeltaTime, ELevelTick TickType,
@@ -49,9 +59,20 @@ void UFGMSoundtrackManager::TickComponent(float DeltaTime, ELevelTick TickType,
 	{
 		return;
 	}
+	
+	const auto CurrentTime = LevelTimeSubsystem->GetCurrentTime();
+	const auto CurrentTimeDirection = LevelTimeSubsystem->GetTimeDirection();
+	const auto CurrentTimeModifier = LevelTimeSubsystem->GetTimeModifier();
 
-	const auto LoadedSoundtrack = Schedule->SoundtrackFile.LoadSynchronous();
-	if (!bSoundtrackFinished && LevelTimeSubsystem->GetCurrentTime() > LoadedSoundtrack->Duration)
+	SwitchPlayedSoundtrack(CurrentTime, CurrentTimeDirection, FMath::Abs(CurrentTimeModifier));
+
+	if (bSoundtrackFinished)
+	{
+		return;
+	} 
+	
+	const auto Sound = Soundtrack->Sound;
+	if (LevelTimeSubsystem->GetCurrentTime() > Sound->Duration)
 	{
 		bSoundtrackFinished = true;
 		
@@ -68,4 +89,68 @@ void UFGMSoundtrackManager::TickComponent(float DeltaTime, ELevelTick TickType,
 			SoundtrackFinishedInterface->OnSoundtrackFinished.Broadcast();
 		}
 	}
+}
+
+void UFGMSoundtrackManager::SwitchPlayedSoundtrack(float CurrentTime, ETimeDirection CurrentTimeDirection, float CurrentTimeModifier)
+{
+	
+	if (LastTickDirection != CurrentTimeDirection)
+	{
+		LastTickDirection = CurrentTimeDirection;
+		
+ 		if (CurrentlyPlayedSoundtrack != nullptr)
+		{
+			StopSoundtrack(CurrentlyPlayedSoundtrack);
+			CurrentlyPlayedSoundtrack = nullptr;
+		}
+		
+		if (CurrentTimeDirection == ETimeDirection::Positive)
+		{
+			CurrentlyPlayedSoundtrack = Soundtrack;
+			PlaySoundtrack(Soundtrack, CurrentTime);
+		}
+		
+		if (CurrentTimeDirection == ETimeDirection::Negative)
+		{
+  			CurrentlyPlayedSoundtrack = RewindSoundtrack;
+			const auto CurrentTimeFromEnd = GetCurrentTimeFromEnd(RewindSoundtrack, CurrentTime);
+			PlaySoundtrack(RewindSoundtrack, CurrentTimeFromEnd);
+		}
+
+		if (CurrentTimeDirection == ETimeDirection::Paused)
+		{
+			// We don't need anything, current already stopped 
+			return;
+		}
+	}
+
+
+	if (CurrentlyPlayedSoundtrack != nullptr)
+	{
+		UpdateSoundtrackSpeed(CurrentlyPlayedSoundtrack, CurrentTimeModifier);
+	}
+}
+
+
+void UFGMSoundtrackManager::PlaySoundtrack(UAudioComponent* AudioComponent, float StartTime)
+{
+	CurrentlyPlayedSoundtrack = AudioComponent;
+	AudioComponent->Play(StartTime);
+}
+
+void UFGMSoundtrackManager::UpdateSoundtrackSpeed(UAudioComponent* AudioComponent, float PlaybackSpeed)
+{
+	LastTickTimeModifier = PlaybackSpeed;
+	AudioComponent->SetPitchMultiplier(PlaybackSpeed);
+}
+
+void UFGMSoundtrackManager::StopSoundtrack(UAudioComponent* AudioComponent)
+{
+	AudioComponent->Stop();
+}
+
+float UFGMSoundtrackManager::GetCurrentTimeFromEnd(UAudioComponent* AudioComponent, float StartTime)
+{
+	const auto Duration = AudioComponent->Sound->Duration;
+	return FMath::Clamp(Duration - StartTime, 0.0f, Duration);
 }

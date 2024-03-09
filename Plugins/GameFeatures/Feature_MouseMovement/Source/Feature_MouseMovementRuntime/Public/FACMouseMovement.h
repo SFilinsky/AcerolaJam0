@@ -16,15 +16,24 @@ class FEATURE_MOUSEMOVEMENTRUNTIME_API UFACMouseMovement : public UGKActorCompon
 
 	
 public:
-
 	UFUNCTION(BlueprintCallable)
 	void MoveToPosition(FVector Position);
 
 protected:
 	
-	FVector GetForceDirection(const FTransform& TargetTransform, const FVector& Direction);
-	float GetForceDistanceRatio(const FTransform& TargetTransform, const FVector& Direction);
-	FVector GetSlopeAdjustmentForce(const FTransform& TargetTransform, const FVector& Direction);
+	FVector GetDirectionalAcceleration(const FTransform& TargetTransform, const FVector& Direction);
+	float GetAccelerationDistanceRatio(const FTransform& TargetTransform, const FVector& Direction);
+	FVector GetVerticalAdjustmentAcceleration(const FTransform& TargetTransform, const FVector& Direction);
+	FVector GetSideBoostAcceleration(const FTransform& StartTransform, const FVector& TargetPosition, const FVector& CurrentVelocity);
+
+	/**
+	 * Returns value between 0 and 1
+	 * 0 means two vectors go in one direction
+	 * 1 means vectors are under angle more then 90
+	 *
+	 * Is used to turn faster on higher 
+	 */
+	float GetDirectionalDifference(const FVector& VecA, const FVector& VecB);
 
 	/* State */
 
@@ -32,15 +41,14 @@ protected:
 
 
 	UPROPERTY(BlueprintReadWrite)
-	float MaxForceDistance = 100.0f;
-	
+	float MaxAccelerationDistance = 100.0f;
+		
 	UPROPERTY(BlueprintReadWrite)
-	float GoingUpBoostAngle = 30.f;
-	
+	float AccelerationPerSecond = 1000.f;
+
 	UPROPERTY(BlueprintReadWrite)
-	float GoingUpBoostScale = 1.25;
-	
+	float MaxDirectionalBoostRatio = 0.2f;
+
 	UPROPERTY(BlueprintReadWrite)
-	float ForcePerSecond = 1000.f;
-	
+	float GravityAdjustmentRatio = 0.75f;
 };

@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-03-07T17:45:58.829Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="f1zQNP5e68vmiJhtISPF" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-09T22:48:39.858Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="ahyYjrXnZLdUsr2_FFXp" version="23.1.5" type="device">
   <diagram name="Page-1" id="owv8p-Lf1dp_q_vDyG9w">
-    <mxGraphModel dx="2821" dy="2071" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3559" dy="2491" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -472,11 +472,23 @@
         <mxCell id="hVNe5g0YaurlKFtI5amK-8" value="Level rythmic material pulse VFX" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="3209" y="-601" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4LuaePRxmvb8qupBFu_W-1" value="Concept Simplifications" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" vertex="1" parent="1">
+        <mxCell id="4LuaePRxmvb8qupBFu_W-1" value="Concept Simplifications" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" parent="1" vertex="1">
           <mxGeometry x="243" y="190" width="310" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="4LuaePRxmvb8qupBFu_W-2" value="Problem&lt;br&gt;Most effects will be hard to rewind, like particle effects. Even if it&#39;s possible to implement, it would span far from game jam scope.&lt;br&gt;&lt;br&gt;Solution:&lt;br&gt;Make rewind fun - track player physics (position, velocity) and allow them to rewind at any moment by pressing space. Continiously holding it it will rewind faster, up to level start.&lt;br&gt;&lt;br&gt;The player has one goal - find the level end before the music stops. There is no direction - you have to explore yourself. You can only fail if you stop trying, rewind means you have endless time to try.&lt;br&gt;&lt;br&gt;This would also mean that level elements should not only be timing-based, but some should also be repetitive.&lt;br&gt;&lt;br&gt;Implementation of this idea should not take much time as soon as rewind is tested for events, and then player rewind is implemented.&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;VFX, SFX, polish and level design should take priority starting 9th of Match.&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="4LuaePRxmvb8qupBFu_W-2" value="Problem&lt;br&gt;Most effects will be hard to rewind, like particle effects. Even if it&#39;s possible to implement, it would span far from game jam scope.&lt;br&gt;&lt;br&gt;Solution:&lt;br&gt;Make rewind fun - track player physics (position, velocity) and allow them to rewind at any moment by pressing space. Continiously holding it it will rewind faster, up to level start.&lt;br&gt;&lt;br&gt;The player has one goal - find the level end before the music stops. There is no direction - you have to explore yourself. You can only fail if you stop trying, rewind means you have endless time to try.&lt;br&gt;&lt;br&gt;This would also mean that level elements should not only be timing-based, but some should also be repetitive.&lt;br&gt;&lt;br&gt;Implementation of this idea should not take much time as soon as rewind is tested for events, and then player rewind is implemented.&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;VFX, SFX, polish and level design should take priority starting 9th of Match.&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="506" y="266" width="349" height="356" as="geometry" />
+        </mxCell>
+        <mxCell id="4LuaePRxmvb8qupBFu_W-3" value="Problem: Rewind looks too robotic &lt;br&gt;Solution: Make camera lag behind player during rewind." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-1576.5" y="266" width="349" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="wOrwGDYFcr75eNLo6pdL-1" value="Abstract Event implementation:&lt;br&gt;&lt;br&gt;However Events are called - Once, with Rewind, with Prepare, Repeatable - it will allow to rule them all&lt;br&gt;&lt;br&gt;BeatManager calls function on ScheduledEvents every tick, giving most actual data (current beat,time direction, time modifier).&lt;br&gt;&lt;br&gt;Event returns list of delegates with Categories to execute them.&lt;br&gt;&lt;br&gt;Then we create set of ScheduledEvent types. To work for different conditions.&lt;br&gt;&lt;br&gt;Solved!" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="399" y="-927" width="360" height="224" as="geometry" />
+        </mxCell>
+        <mxCell id="wOrwGDYFcr75eNLo6pdL-2" value="Left to do as of 9 March" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="1730" y="206" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wOrwGDYFcr75eNLo6pdL-3" value="- Change event system&lt;br&gt;- Implement repetitive, trigger and trigger with offset events&lt;br&gt;- Implement moving platforms and doors&lt;br&gt;- Update effect for disappear&lt;br&gt;- Add moving sun&lt;br&gt;- Add character ghost model&lt;br&gt;&amp;nbsp;- (options) add ghost eyes&lt;br&gt;- Finish soundtrack&lt;br&gt;- Compose level&lt;br&gt;- Playtest and fix issues" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1710.5" y="273" width="349" height="222" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
