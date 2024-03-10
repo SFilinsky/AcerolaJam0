@@ -28,7 +28,7 @@ void UFGMSoundtrackManager::BeginPlay()
 	checkSlow(World);
 
 	const auto LoadedSoundtrack = Schedule->SoundtrackFile.LoadSynchronous();
-	const auto LoadedRewindSoundtrack = Schedule->SoundtrackFile.LoadSynchronous();
+	const auto LoadedRewindSoundtrack = Schedule->BackwardsSoundtrackFile.LoadSynchronous();
 	if (!ensure(LoadedSoundtrack != nullptr) || !ensure(LoadedRewindSoundtrack != nullptr))
 	{
 		DestroyComponent();
