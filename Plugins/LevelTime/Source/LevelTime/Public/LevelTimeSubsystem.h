@@ -72,5 +72,5 @@ public:
 protected:
 
 	float CurrentTime = 0.0f;
-	float TimeDirection = 1.0f;
+	float TimeDirection = ETimeDirection::Positive;
 };

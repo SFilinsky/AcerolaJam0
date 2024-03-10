@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "BeatSubsystem.h"
 #include "GKActorComponent.h"
-#include "AcerolaJam0/DataAssets/LevelScheduleDataAsset.h"
 #include "FGMBeatManager.generated.h"
 
 struct FBeatManagerEventChangeInfo;
@@ -30,8 +29,6 @@ protected:
 	void TriggerEvents();
 
 protected:
-	
-	bool IsBeatNow(FBeatInterval CurrentBeatInfo, float BeatToCheck) const;
 	
 	/* State */
 

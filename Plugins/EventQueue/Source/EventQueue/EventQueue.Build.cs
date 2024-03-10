@@ -25,7 +25,8 @@ public class EventQueue : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core",
+				"Core", 
+				"AcerolaJam0",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -37,7 +38,8 @@ public class EventQueue : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"Slate",
-				"SlateCore",
+				"SlateCore", 
+				"AcerolaJam0",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

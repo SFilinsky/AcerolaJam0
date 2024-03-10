@@ -14,8 +14,6 @@ void ULevelTimeSubsystem::OnWorldBeginPlay(UWorld& InWorld)
 void ULevelTimeSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
-
-	CurrentTime = 0.0f;
 }
 
 void ULevelTimeSubsystem::Tick(float DeltaTime)

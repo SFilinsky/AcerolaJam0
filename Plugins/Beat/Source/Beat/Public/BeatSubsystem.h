@@ -10,32 +10,45 @@
 class ULevelScheduleDataAsset;
 
 USTRUCT(Blueprintable)
-struct FBeatInterval {
+struct FBeatInfo {
 
 	GENERATED_BODY()
 
-	FBeatInterval()
+	FBeatInfo()
 	{
-		Direction = Positive;
+		Direction = ETimeDirection::Paused;
+		TimeModifierSigned = 0;
 		Start = 0;
 		End = 0;
 	}
 	
-	FBeatInterval(ETimeDirection DirectionValue, float StartValue, float EndValue)
+	FBeatInfo(ETimeDirection DirectionValue, float TimeModifierSignedValue, float StartValue, float EndValue)
 	{
 		Direction = DirectionValue;
+		TimeModifierSigned = TimeModifierSignedValue;
 		Start = StartValue;
 		End = EndValue;
 	};
-
+	
 	UPROPERTY(BlueprintReadOnly)
 	TEnumAsByte<ETimeDirection> Direction;
+	
+	UPROPERTY(BlueprintReadOnly)
+	float TimeModifierSigned;
 	
 	UPROPERTY(BlueprintReadOnly)
 	float Start;
 	
 	UPROPERTY(BlueprintReadOnly)
 	float End;
+
+	/**
+	 * Check if this BeatInfo includes wanted Beat
+	 */
+	bool IsBeatNow(const float BeatToCheck) const
+	{
+		return Start <= BeatToCheck && End >= BeatToCheck;
+	}
 };
 
 
@@ -58,10 +71,11 @@ public:
 	float TimeDeltaToBeat(float TimeInSeconds);
 
 	UFUNCTION(BlueprintCallable)
-	const FBeatInterval GetCurrentBeatInfo();
+	const FBeatInfo GetCurrentBeatInfo();
 	
 
 protected:
-	
+
+	UPROPERTY()
 	const ULevelScheduleDataAsset* Schedule;
 };

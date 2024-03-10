@@ -8,7 +8,7 @@ public class AcerolaJam0 : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "InterfaceKit", "Beat" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "EventQueue" });
 

@@ -3,8 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EventQueueSubsystem.h"
-#include "InterfaceKit/GKInterfaceComponent.h"
+#include "LevelEventBase.h"
 #include "ICScheduledLevelEvent.generated.h"
 
 /**
@@ -17,7 +16,7 @@
  * One more advantage - it will protect from typos in LevelSchedule asset configurations.
  */
 UCLASS(Blueprintable, Abstract)
-class ACEROLAJAM0_API UICScheduledLevelEvent : public UGKInterfaceComponent
+class ACEROLAJAM0_API UICScheduledLevelEvent : public ULevelEventBase
 {
 	GENERATED_BODY()
 
@@ -25,6 +24,7 @@ class ACEROLAJAM0_API UICScheduledLevelEvent : public UGKInterfaceComponent
 
 public:
 
+	virtual TArray<FEventUpdateInformation> HandleUpdate(const FBeatInfo CurrentBeatInfo) override;
 	
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FTriggerScheduledLevelEventDelegate OnPrepare;

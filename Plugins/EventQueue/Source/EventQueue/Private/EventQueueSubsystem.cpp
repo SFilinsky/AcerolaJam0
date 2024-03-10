@@ -3,19 +3,21 @@
 
 #include "EventQueueSubsystem.h"
 
+#include "AcerolaJam0/LevelEvents/LevelEventBase.h"
+
 void UEventQueueSubsystem::ExecuteEvents()
 {
-	ExecuteCategoryQueue(VFX);
-	ExecuteCategoryQueue(SFX);
-	ExecuteCategoryQueue(Physics);
+	ExecuteCategoryQueue(EEventCategory::VFX);
+	ExecuteCategoryQueue(EEventCategory::SFX);
+	ExecuteCategoryQueue(EEventCategory::Physics);
 
 	ClearAllQueues();
 }
 
-void UEventQueueSubsystem::EnqueueEvent(const EEventCategory Category, const TFunction<void()>& Event)
+void UEventQueueSubsystem::EnqueueEvent(const FEventUpdateInformation& EventUpdateInformation)
 {
-	auto& EventQueue = EventQueueMap.FindOrAdd(Category);
-	EventQueue.Add(Event);
+	auto& EventQueue = EventQueueMap.FindOrAdd(EventUpdateInformation.Category);
+	EventQueue.Add(EventUpdateInformation.Callback);
 }
 
 void UEventQueueSubsystem::ExecuteCategoryQueue(const EEventCategory Category)

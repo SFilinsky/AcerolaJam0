@@ -39,27 +39,27 @@ float UBeatSubsystem::TimeToBeat(float TimeInSeconds)
 	return TimeInSeconds * (Schedule->Tempo / 60.0f) + 1;
 }
 
-const FBeatInterval UBeatSubsystem::GetCurrentBeatInfo()
+const FBeatInfo UBeatSubsystem::GetCurrentBeatInfo()
 {
 	const auto World = GetWorld();
 	checkSlow(World);
 	
 	const auto LevelTimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
 
+	
+	const auto TimeDirection = LevelTimeSubsystem->GetTimeDirection();
+	const auto TimeModifier = LevelTimeSubsystem->GetTimeModifier();
+	
+	const auto CurrentTime = LevelTimeSubsystem->GetCurrentTime();
+	const auto CurrentBeat = TimeToBeat(CurrentTime);
+	
 	const auto FrameDelta = LevelTimeSubsystem->GetAdjustedFrameDelta();
-	const auto LevelTime = LevelTimeSubsystem->GetCurrentTime();
 	const auto BeatDelta = TimeDeltaToBeat(FrameDelta);
-	const auto CurrentBeat = TimeToBeat(LevelTime);
-
-	if (LevelTimeSubsystem->IsPaused())
-	{
-		return FBeatInterval(Paused, CurrentBeat, CurrentBeat);
-	}
-
-	if (BeatDelta >= 0)
-	{
-		return FBeatInterval(Positive, CurrentBeat, CurrentBeat + BeatDelta);
-	}
-
-	return FBeatInterval(Negative, CurrentBeat + BeatDelta, CurrentBeat);
+	
+	return FBeatInfo(
+		TimeDirection,
+		TimeModifier,
+		FMath::Min(CurrentBeat, CurrentBeat + BeatDelta),
+		FMath::Max(CurrentBeat, CurrentBeat + BeatDelta)
+	);
 }

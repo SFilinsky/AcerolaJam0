@@ -43,76 +43,20 @@ void UFGMBeatManager::TriggerEvents()
 	const auto InterfaceSubsystem = GameInstance->GetSubsystem<UGKInterfaceSubsystem>();
 	
 	const auto BeatInfo = BeatSubsystem->GetCurrentBeatInfo();
-	if (BeatInfo.Direction == Paused)
-	{
-		return;
-	}
 	
-	const auto EventInstances = InterfaceSubsystem->GetInterfaceClassInstances(UICScheduledLevelEvent::StaticClass());
-	
+	const auto EventInstances = InterfaceSubsystem->GetInterfaceClassInstances(ULevelEventBase::StaticClass());
 	for (const auto EventToActivate : EventInstances)
 	{
-		const auto ScheduledEvent = Cast<UICScheduledLevelEvent>(EventToActivate);
-		checkSlow(ScheduledEvent);
+		const auto LevelEvent = Cast<ULevelEventBase>(EventToActivate);
+		checkSlow(LevelEvent);
 
-		if (IsBeatNow(BeatInfo, ScheduledEvent->BeatNumber))
+		const auto EventUpdateInformationList = LevelEvent->HandleUpdate(BeatInfo);
+		for (const auto EventUpdateInformation : EventUpdateInformationList)
 		{
-			if (BeatInfo.Direction == Positive)
-			{
-				EventQueueSubsystem->EnqueueEvent(
-					ScheduledEvent->Category,
-					[ScheduledEvent]() { 
-						ScheduledEvent->OnTriggered.Broadcast();
-					}
-				);
-			} 
-
-			if (BeatInfo.Direction == Negative)
-			{
-				EventQueueSubsystem->EnqueueEvent(
-					ScheduledEvent->Category,
-					[ScheduledEvent]() { 
-						ScheduledEvent->OnRewind.Broadcast();
-					}
-				);
-			}
-			
-			continue;
-		}
-		
-		if (IsBeatNow(BeatInfo, ScheduledEvent->BeatNumber - ScheduledEvent->PrepareDurationInBeats))
-		{
-			if (BeatInfo.Direction == Positive)
-			{
-				EventQueueSubsystem->EnqueueEvent(
-					ScheduledEvent->Category,
-					[ScheduledEvent]() { 
-							ScheduledEvent->OnPrepare.Broadcast();
-						}
-				);
-			} 
-
-			if (BeatInfo.Direction == Negative)
-			{
-				EventQueueSubsystem->EnqueueEvent(
-					ScheduledEvent->Category,
-					[ScheduledEvent]() { 
-							ScheduledEvent->OnPrepareRewind.Broadcast();
-						}
-				);
-			}
-			
-			continue;
+			EventQueueSubsystem->EnqueueEvent(EventUpdateInformation);
 		}
 	}
 
 	EventQueueSubsystem->ExecuteEvents();
 }
-
-
-bool UFGMBeatManager::IsBeatNow(FBeatInterval CurrentBeatInfo, float BeatToCheck) const
-{
-	return CurrentBeatInfo.Start <= BeatToCheck && CurrentBeatInfo.End >= BeatToCheck;
-}
-
 

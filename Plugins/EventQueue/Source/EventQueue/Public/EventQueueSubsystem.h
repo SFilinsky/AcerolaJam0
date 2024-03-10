@@ -3,16 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AcerolaJam0/LevelEvents/LevelEventBase.h"
 #include "Subsystems/WorldSubsystem.h"
 #include "EventQueueSubsystem.generated.h"
 
-UENUM(Blueprintable)
-enum EEventCategory
-{
-	SFX,
-	VFX,
-	Physics
-};
 
 /**
  * 
@@ -27,14 +21,13 @@ public:
 
 	// Called every tick or at a specific interval
 	void ExecuteEvents();
-
 	
 	/**
 	 * Pushes event to specific category queue
 	 *
 	 * It will be executed when EventQueueSubsystem ticks
 	 */
-	void EnqueueEvent(EEventCategory Category, const TFunction<void()>& Event);
+	void EnqueueEvent(const FEventUpdateInformation& EventUpdateInformation);
 
 protected:
 	

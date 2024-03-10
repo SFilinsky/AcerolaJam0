@@ -28,6 +28,14 @@
 		{
 			"Name": "GameplayKit",
 			"Enabled": true
+		},
+		{
+			"Name": "LevelTime",
+			"Enabled": true
+		},
+		{
+			"Name": "Beat",
+			"Enabled": true
 		}
 	]
 }
