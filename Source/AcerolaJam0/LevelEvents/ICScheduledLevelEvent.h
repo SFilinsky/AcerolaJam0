@@ -15,7 +15,7 @@
  *
  * One more advantage - it will protect from typos in LevelSchedule asset configurations.
  */
-UCLASS(Blueprintable, Abstract)
+UCLASS(Blueprintable, BlueprintType, meta=(BlueprintSpawnableComponent))
 class ACEROLAJAM0_API UICScheduledLevelEvent : public ULevelEventBase
 {
 	GENERATED_BODY()

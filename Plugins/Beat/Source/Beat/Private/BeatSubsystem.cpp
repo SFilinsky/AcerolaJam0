@@ -60,6 +60,7 @@ const FBeatInfo UBeatSubsystem::GetCurrentBeatInfo()
 		TimeDirection,
 		TimeModifier,
 		FMath::Min(CurrentBeat, CurrentBeat + BeatDelta),
-		FMath::Max(CurrentBeat, CurrentBeat + BeatDelta)
+		FMath::Max(CurrentBeat, CurrentBeat + BeatDelta),
+		CurrentTime
 	);
 }

@@ -41,7 +41,10 @@ public class Feature_GameFinishedRuntime : ModuleRules
 				"SlateCore",
 				"GameplayKit",
 				"InterfaceKit",
-				"Interface_GameFinished"
+				"Interface_GameFinished", 
+				"AcerolaJam0", 
+				"Interface_SoundtrackFinishedRuntime",
+				"LevelTime"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GKActorComponent.h"
+#include "GameplayKit/Proximity/Proximity.h"
 #include "FGMGameFinished.generated.h"
 
 /**
@@ -16,12 +17,56 @@ class FEATURE_GAMEFINISHEDRUNTIME_API UFGMGameFinished : public UGKActorComponen
 {
 	GENERATED_BODY()
 
-protected:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoseStateChanged);
 	
-	/**
-	 * Should be called when level is considered complete
-	 */
+protected:
+
+	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	UFUNCTION(BlueprintCallable)
-	void OnWin();
+	void Lose();
+
+	UFUNCTION(BlueprintCallable)
+	void UnLose();
+	
+	UFUNCTION(BlueprintCallable)
+	void Win();
+
+public:
+
+	UPROPERTY(BlueprintAssignable)
+	FLoseStateChanged OnLose;
+	
+	UPROPERTY(BlueprintAssignable)
+	FLoseStateChanged OnUnLose;
+	
+	UPROPERTY(BlueprintAssignable)
+	FLoseStateChanged OnWin;
+	
+protected:
+
+	/* State */
+
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> GoalActorType;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> PlayerActorType;
+	
+	UPROPERTY(EditDefaultsOnly)
+	float WinDistance = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float GameCloseDelayAfterWin = 15.0f;
+
+	FTimerHandle TimerHandle;
+
+	UPROPERTY()
+	UProximity* ProximityDetector;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bWon;
 	
 };

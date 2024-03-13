@@ -7,7 +7,7 @@
 #include "LevelTimeSubsystem.generated.h"
 
 UENUM()
-enum ETimeDirection
+enum class ETimeDirection : int8
 {
 	Positive = 1,
 	Paused = 0,
@@ -72,5 +72,5 @@ public:
 protected:
 
 	float CurrentTime = 0.0f;
-	float TimeDirection = ETimeDirection::Positive;
+	float TimeDirection = 1;
 };

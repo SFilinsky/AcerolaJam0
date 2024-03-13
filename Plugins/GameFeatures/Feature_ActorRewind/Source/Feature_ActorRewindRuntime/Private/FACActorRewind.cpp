@@ -25,18 +25,18 @@ void UFACActorRewind::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	const auto TimeDirection = LevelTimeSubsystem->GetTimeDirection();
 	const auto CurrentTime = LevelTimeSubsystem->GetCurrentTime();
 
-	if (TimeDirection > 0)
+	if (TimeDirection == ETimeDirection::Positive)
 	{
 		StateSnapshots.Add(GetSnapshot(MovedComponent, CurrentTime));
 	}
 
-	if (TimeDirection < 0)
+	if (TimeDirection == ETimeDirection::Negative)
 	{
 		LoadSnapshot(MovedComponent, CurrentTime);
 		RemoveAllSnapshotsAfterTime(CurrentTime);
 	}
 
-	if (TimeDirection == 0)
+	if (TimeDirection == ETimeDirection::Paused)
 	{
 		// We don't need anything
 	}

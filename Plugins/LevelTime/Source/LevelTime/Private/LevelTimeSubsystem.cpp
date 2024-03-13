@@ -30,6 +30,9 @@ void ULevelTimeSubsystem::Tick(float DeltaTime)
 	}
 }
 
+/**
+ * You should also call SetTimeModifier() yourself after it
+ */
 void ULevelTimeSubsystem::Unpause()
 {
 	const auto World = GetWorld();
@@ -44,6 +47,7 @@ void ULevelTimeSubsystem::Pause()
 	checkSlow(World);
 	
 	UGameplayStatics::SetGamePaused(World, true);
+	SetTimeModifier(0);
 }
 
 bool ULevelTimeSubsystem::IsPaused()
@@ -93,7 +97,7 @@ ETimeDirection ULevelTimeSubsystem::GetTimeDirection()
 	}
 
 	if (TimeDirection < 0) {
-		return ETimeDirection::Negative;
+   		return ETimeDirection::Negative;
 	}
 
 	return ETimeDirection::Paused;

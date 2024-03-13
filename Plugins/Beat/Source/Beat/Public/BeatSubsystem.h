@@ -22,16 +22,17 @@ struct FBeatInfo {
 		End = 0;
 	}
 	
-	FBeatInfo(ETimeDirection DirectionValue, float TimeModifierSignedValue, float StartValue, float EndValue)
+	FBeatInfo(ETimeDirection DirectionValue, float TimeModifierSignedValue, float StartValue, float EndValue, float ExactValue)
 	{
 		Direction = DirectionValue;
 		TimeModifierSigned = TimeModifierSignedValue;
 		Start = StartValue;
 		End = EndValue;
+		Exact = ExactValue;
 	};
 	
 	UPROPERTY(BlueprintReadOnly)
-	TEnumAsByte<ETimeDirection> Direction;
+	ETimeDirection Direction;
 	
 	UPROPERTY(BlueprintReadOnly)
 	float TimeModifierSigned;
@@ -42,6 +43,9 @@ struct FBeatInfo {
 	UPROPERTY(BlueprintReadOnly)
 	float End;
 
+	UPROPERTY(BlueprintReadOnly)
+	float Exact;
+	
 	/**
 	 * Check if this BeatInfo includes wanted Beat
 	 */

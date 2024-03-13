@@ -9,7 +9,7 @@ TArray<FEventUpdateInformation> UICScheduledLevelEvent::HandleUpdate(const FBeat
 
 	if (CurrentBeatInfo.IsBeatNow(BeatNumber))
 	{
-		if (CurrentBeatInfo.Direction == Positive)
+		if (CurrentBeatInfo.Direction == ETimeDirection::Positive)
 		{
 			Handlers.Add({	
 				.Category = Category,
@@ -17,7 +17,7 @@ TArray<FEventUpdateInformation> UICScheduledLevelEvent::HandleUpdate(const FBeat
 			});
 		} 
 	
-		if (CurrentBeatInfo.Direction == Negative)
+		if (CurrentBeatInfo.Direction == ETimeDirection::Negative)
 		{
 			Handlers.Add({	
 				.Category = Category,
@@ -30,7 +30,7 @@ TArray<FEventUpdateInformation> UICScheduledLevelEvent::HandleUpdate(const FBeat
 	
 	if (CurrentBeatInfo.IsBeatNow(BeatNumber - PrepareDurationInBeats))
 	{
-		if (CurrentBeatInfo.Direction == Positive)
+		if (CurrentBeatInfo.Direction == ETimeDirection::Positive)
 		{
 			Handlers.Add({	
 				.Category = Category,
@@ -38,7 +38,7 @@ TArray<FEventUpdateInformation> UICScheduledLevelEvent::HandleUpdate(const FBeat
 			});
 		} 
 	
-		if (CurrentBeatInfo.Direction == Negative)
+		if (CurrentBeatInfo.Direction == ETimeDirection::Negative)
 		{
 			Handlers.Add({	
 				.Category = Category,

@@ -16,7 +16,7 @@ class INTERFACE_GAMEFINISHED_API UICGameFinished : public UGKInterfaceComponent
 
 public:
 	
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameFinishedDelegate);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameFinishedDelegate, float, GameClosesIn);
 	
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FGameFinishedDelegate OnGameFinished;

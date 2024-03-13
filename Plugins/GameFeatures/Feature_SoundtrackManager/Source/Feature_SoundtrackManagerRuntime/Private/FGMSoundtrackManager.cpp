@@ -113,7 +113,7 @@ void UFGMSoundtrackManager::SwitchPlayedSoundtrack(float CurrentTime, ETimeDirec
 		if (CurrentTimeDirection == ETimeDirection::Negative)
 		{
   			CurrentlyPlayedSoundtrack = RewindSoundtrack;
-			const auto CurrentTimeFromEnd = GetCurrentTimeFromEnd(RewindSoundtrack, CurrentTime);
+ 			const auto CurrentTimeFromEnd = GetCurrentTimeFromEnd(RewindSoundtrack, CurrentTime);
 			PlaySoundtrack(RewindSoundtrack, CurrentTimeFromEnd);
 		}
 

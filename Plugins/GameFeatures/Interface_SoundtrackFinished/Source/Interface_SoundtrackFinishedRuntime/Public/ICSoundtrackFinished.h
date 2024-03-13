@@ -20,5 +20,10 @@ public:
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FSoundtrackFinishedDelegate OnSoundtrackFinished;
+
+	
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FSoundtrackFinishedDelegate OnSoundtrackUnFinished;
+	
 	
 };

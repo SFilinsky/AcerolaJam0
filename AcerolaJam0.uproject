@@ -98,6 +98,26 @@
 		{
 			"Name": "Feature_SoundtrackTimeCounter",
 			"Enabled": true
+		},
+		{
+			"Name": "Feature_MoveActor",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_SunMovement",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_Clouds",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_EyeTracking",
+			"Enabled": true
+		},
+		{
+			"Name": "Feature_Jump",
+			"Enabled": true
 		}
 	]
 }

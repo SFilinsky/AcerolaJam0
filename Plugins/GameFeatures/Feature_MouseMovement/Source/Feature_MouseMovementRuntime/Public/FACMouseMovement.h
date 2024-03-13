@@ -13,14 +13,13 @@ UCLASS()
 class FEATURE_MOUSEMOVEMENTRUNTIME_API UFACMouseMovement : public UGKActorComponent
 {
 	GENERATED_BODY()
-
 	
 public:
 	UFUNCTION(BlueprintCallable)
 	void MoveToPosition(FVector Position);
 
 protected:
-	
+
 	FVector GetDirectionalAcceleration(const FTransform& TargetTransform, const FVector& Direction);
 	float GetAccelerationDistanceRatio(const FTransform& TargetTransform, const FVector& Direction);
 	FVector GetVerticalAdjustmentAcceleration(const FTransform& TargetTransform, const FVector& Direction);

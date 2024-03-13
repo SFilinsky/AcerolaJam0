@@ -45,7 +45,7 @@ void UFACMouseMovement::MoveToPosition(FVector Position)
 	const auto TotalAcceleration = DistanceRatio * (SideBoostAcceleration + DirectionalAcceleration);
 
 
-	DrawDebugLine(MovedPrimitive->GetWorld(),MovedPrimitive->GetComponentLocation(),MovedPrimitive->GetComponentLocation() + TotalAcceleration / 100, FColor::Green,false, 3.0f, 0, 0.75f);
+	// DrawDebugLine(MovedPrimitive->GetWorld(),MovedPrimitive->GetComponentLocation(),MovedPrimitive->GetComponentLocation() + TotalAcceleration / 100, FColor::Green,false, 3.0f, 0, 0.75f);
 	
 	MovedPrimitive->AddForce(TotalAcceleration * MovedPrimitive->GetMass()); // We multiply for mass to get final force value; It will make mass to not impact acceleration at the end.
 
