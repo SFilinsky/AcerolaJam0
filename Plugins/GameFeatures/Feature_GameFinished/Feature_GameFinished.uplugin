@@ -36,6 +36,10 @@
 		{
 			"Name": "GameplayKit",
 			"Enabled": true
+		},
+		{
+			"Name": "LevelTime",
+			"Enabled": true
 		}
 	]
 }

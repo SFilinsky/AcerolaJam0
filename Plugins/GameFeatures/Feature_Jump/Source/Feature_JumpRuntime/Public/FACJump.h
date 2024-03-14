@@ -4,14 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GKActorComponent.h"
-#include "F_AC_Jump.generated.h"
+#include "FACJump.generated.h"
 
 UCLASS(Blueprintable)
-class FEATURE_JUMPRUNTIME_API UF_AC_Jump : public UGKActorComponent
+class FEATURE_JUMPRUNTIME_API UFACJump : public UGKActorComponent
 {
 	GENERATED_BODY()
 
+public:
+	
 	UFUNCTION(BlueprintCallable)
 	void Jump();
+
+	/* State */
+
+protected:
+
+	UPROPERTY(BlueprintReadWrite)
+	float JumpImpulsePerKg = 1000.0f;
 	
 };

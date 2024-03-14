@@ -58,10 +58,10 @@ protected:
 	uint32 Seed = 0;
 	
 	UPROPERTY(EditDefaultsOnly)
-	uint32 CloudNumber = 5;
+	uint32 CloudNumber = 50;
 	
 	UPROPERTY(EditDefaultsOnly)
-	float LifetimeCycleDuration = 10;
+	float LifetimeCycleDuration = 100;
 	
 	UPROPERTY(EditDefaultsOnly)
 	FVector Direction;
@@ -84,6 +84,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	float YMax;
 
+	UPROPERTY(EditDefaultsOnly)
+	float ScaleMin;
+
+	UPROPERTY(EditDefaultsOnly)
+	float ScaleMax;
+	
 	UPROPERTY(EditDefaultsOnly)
 	float MinSpeed;
 	

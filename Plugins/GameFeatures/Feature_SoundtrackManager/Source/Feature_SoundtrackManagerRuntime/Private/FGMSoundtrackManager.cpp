@@ -66,16 +66,13 @@ void UFGMSoundtrackManager::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	SwitchPlayedSoundtrack(CurrentTime, CurrentTimeDirection, FMath::Abs(CurrentTimeModifier));
 
-	if (bSoundtrackFinished)
-	{
-		return;
-	} 
+	const auto SoundtrackDuration = Soundtrack->Sound->Duration;
+	const bool SoundtrackFinishedNow = CurrentTime >= SoundtrackDuration;
 	
-	const auto Sound = Soundtrack->Sound;
-	if (LevelTimeSubsystem->GetCurrentTime() > Sound->Duration)
+	if (bSoundtrackFinished != SoundtrackFinishedNow)
 	{
-		bSoundtrackFinished = true;
-		
+		bSoundtrackFinished = SoundtrackFinishedNow;
+	
 		const auto InterfaceInstances = InterfaceSubsystem->GetInterfaceClassInstances(UICSoundtrackFinished::StaticClass());
 
 		for (const auto InterfaceInstance : InterfaceInstances)
@@ -86,7 +83,14 @@ void UFGMSoundtrackManager::TickComponent(float DeltaTime, ELevelTick TickType,
 				continue;
 			}
 
-			SoundtrackFinishedInterface->OnSoundtrackFinished.Broadcast();
+			if (SoundtrackFinishedNow)
+			{
+				SoundtrackFinishedInterface->OnSoundtrackFinished.Broadcast();
+			}
+			else
+			{
+				SoundtrackFinishedInterface->OnSoundtrackUnFinished.Broadcast();
+			}
 		}
 	}
 }

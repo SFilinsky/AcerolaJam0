@@ -46,6 +46,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Move To Point")
 	float MoveToPoint_DirectionalBoostRatio = 0.25f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Move To Point")
+	float MoveToPoint_SoftSpeedCap = 300.f;
 
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Mouse Parallax")
@@ -69,4 +72,31 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Speed Effects")
 	float CameraEffects_InterpolationDelay = 0.3f;
+
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jump")
+	float Jump_ImpulsePerKg = 1000.f;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_DelayFlat = 0.5f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_DelayInBeats = 0.5f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_Flat = 0.25f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_Ratio = 2.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_ExpRatio = 0.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_RecoveryFlat = 0.5f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rewind Controls")
+	float Rewind_RecoveryDelayBeats = 0.15f;
+
 };

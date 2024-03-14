@@ -34,11 +34,13 @@ void UFGMClouds::SpawnObjects()
 {
 
 	FMath::RandInit(Seed);
-
-	CloudActor = Cast<AActor>(UGameplayStatics::SpawnObject(AActor::StaticClass(), this));
 	
 	for (uint32 Index = 0; Index < CloudNumber; Index++)
 	{
+		CloudActor = Cast<AActor>(UGameplayStatics::SpawnObject(AActor::StaticClass(), this));
+
+		const auto DirectionShiftRatioX = FMath::FRand() / 4;
+		const auto DirectionShiftRatioY = FMath::FRand() / 4;
 		const FCloudLifetimeInfo CloudInfo = {
 			.LifetimeShift = FMath::FRand() * LifetimeCycleDuration,
 			.StartPosition = FVector({
@@ -46,16 +48,23 @@ void UFGMClouds::SpawnObjects()
 				FMath::FRandRange(YMin, YMax),
 				FMath::FRandRange(ZMin, ZMax),
 			}),
-			.Speed = MinSpeed * FVector(1.0f, 1.0f, 1.0f) + (Direction.GetSafeNormal() * (MaxSpeed - MinSpeed)),
-			.Component = NewObject<UStaticMeshComponent>(this, *FString::Printf(TEXT("Cloud %d"), Index))
+			.Speed = FVector(
+					DirectionShiftRatioX * Direction.X,
+					DirectionShiftRatioY * Direction.Y,
+					0.0
+				).GetSafeNormal() * FMath::FRandRange(MinSpeed, MaxSpeed),
+			.Component = NewObject<UStaticMeshComponent>(CloudActor, *FString::Printf(TEXT("Cloud %d"), Index))
 		};
-		CloudInfo.Component->SetupAttachment(CloudActor->GetRootComponent());
+		const auto ScaleFactor = FMath::FRandRange(ScaleMin, ScaleMax);
+		CloudInfo.Component->SetWorldScale3D(FVector(ScaleFactor, ScaleFactor, 1.0));
+		
+		CloudActor->SetRootComponent(CloudInfo.Component);
 		CloudInfo.Component->RegisterComponent();
 		CloudInfo.Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		CloudInfo.Component->SetEnableGravity(false);
 
 		CloudInfo.Component->SetStaticMesh(CloudMesh);
-		CloudInfo.Component->SetMaterial(0, UMaterialInstanceDynamic::Create(CloudMaterial, this));
+		CloudInfo.Component->SetMaterial(0, UMaterialInstanceDynamic::Create(CloudMaterial, CloudInfo.Component));
 		
 		Clouds.Add(CloudInfo);
 	}

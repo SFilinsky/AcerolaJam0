@@ -37,8 +37,7 @@ protected:
 	/* State */
 
 protected:
-
-
+	
 	UPROPERTY(BlueprintReadWrite)
 	float MaxAccelerationDistance = 100.0f;
 		
@@ -50,4 +49,7 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	float GravityAdjustmentRatio = 0.75f;
+	
+	UPROPERTY(BlueprintReadWrite)
+	float SoftSpeedCap = 300.0f;
 };

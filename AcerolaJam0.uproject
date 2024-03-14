@@ -118,6 +118,10 @@
 		{
 			"Name": "Feature_Jump",
 			"Enabled": true
+		},
+		{
+			"Name": "Feature_Intro",
+			"Enabled": true
 		}
 	]
 }

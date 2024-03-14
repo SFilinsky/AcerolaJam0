@@ -10,9 +10,9 @@
 #include "ICGameFinished.h"
 #include "ICSoundtrackFinished.h"
 #include "LevelTimeSubsystem.h"
-#include "AcerolaJam0/Overrides/GMLevelBase.h"
-#include "Editor/EditorEngine.h"
-#include "GameplayKit/HelperFunctions/ForEachArrayElement.h"
+#if WITH_EDITOR
+	#include "Editor/EditorEngine.h"
+#endif
 #include "GameplayKit/HelperFunctions/MapArray.h"
 #include "InterfaceKit/Subsystems/InterfaceSubsystem/GKInterfaceSubsystem.h"
 #include "Kismet/GameplayStatics.h"
@@ -90,23 +90,60 @@ void UFGMGameFinished::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UFGMGameFinished::Lose()
 {
+	if (bWon)
+	{
+		return;
+	}
+	
 	const auto World = GetWorld();
 	checkSlow(World);
 
 	const auto LevelTimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
 	checkSlow(LevelTimeSubsystem);
+	
+	const float TimeWhenLost = World->GetTimeSeconds();
+	World->GetTimerManager().SetTimer(
+		LoseTimerHandle,
+		[World, this, TimeWhenLost, LevelTimeSubsystem]()
+		{
+			const auto TimeNow = World->GetTimeSeconds();
+			const auto TimePassed = TimeNow - TimeWhenLost;
+			const auto PartPassed = FMath::Clamp(TimePassed / this->TimeStopIntervalOnLose, 0, 1);
+			LevelTimeSubsystem->SetTimeModifier(1 - PartPassed);
 
-	LevelTimeSubsystem->Pause();
-
+			if (PartPassed == 1)
+			{
+				if (LoseTimerHandle.IsValid())
+				{
+					World->GetTimerManager().ClearTimer(LoseTimerHandle);
+				}
+			}
+		},
+		0.015,
+		true
+	);
+	
 	OnLose.Broadcast();
 }
 
 
 void UFGMGameFinished::UnLose()
 {
+	if (bWon)
+	{
+		return;
+	}
+	
+  	const auto World = GetWorld();
+	checkSlow(World);
+	
 	/**
 	 * We expect that game was unpaused and time modifier set by some other feature
 	 */
+	if (LoseTimerHandle.IsValid())
+	{
+		World->GetTimerManager().ClearTimer(LoseTimerHandle);
+	}
 	
 	OnUnLose.Broadcast();
 }
@@ -124,9 +161,6 @@ void UFGMGameFinished::Win()
 
 	const auto InterfaceSubsystem = GameInstance->GetSubsystem<UGKInterfaceSubsystem>();
 	checkSlow(InterfaceSubsystem);
-	
-	const auto LevelTimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
-	checkSlow(LevelTimeSubsystem);
 
 	const auto Instances = InterfaceSubsystem->GetInterfaceClassInstances(UICGameFinished::StaticClass());
 	for (const auto Instance : Instances)
@@ -138,7 +172,7 @@ void UFGMGameFinished::Win()
 	}
 
 	World->GetTimerManager().SetTimer(
-		TimerHandle,
+		WinTimerHandle,
 		[World, this]()
 		{
 			UKismetSystemLibrary::QuitGame(World, UGameplayStatics::GetPlayerController(World, 0), EQuitPreference::Quit, true);

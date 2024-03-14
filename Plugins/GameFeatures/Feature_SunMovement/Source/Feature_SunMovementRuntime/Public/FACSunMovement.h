@@ -35,6 +35,18 @@ protected:
 		UPROPERTY(EditAnywhere)
 		float EditorTimeProgress = 0.5f;
 	#endif
+
+	UPROPERTY(EditAnywhere)
+	float SunriseElevation = 0.0f;
+	
+	UPROPERTY(EditAnywhere)
+	float SunsetElevation = 0.0f;
+	
+	UPROPERTY(EditAnywhere)
+	float NoonElevation = 90.0f;
+	
+	UPROPERTY(EditAnywhere)
+	float ExpRatio = 3;
 	
 	UPROPERTY(EditAnywhere)
 	float AzimuthRange = 90;

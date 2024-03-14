@@ -48,7 +48,7 @@ void UFACSunMovement::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	
 	const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
 
-	const auto Progress = FMath::Pow(FMath::Clamp(TimeSubsystem->GetCurrentTime() / Schedule->SoundtrackFile->Duration, 0.001, 1), 6) / 3;
+	const auto Progress = FMath::Pow(FMath::Clamp(TimeSubsystem->GetCurrentTime() / Schedule->SoundtrackFile->Duration, 0.001, 1), ExpRatio) / 3;
 	
 	const auto Rotation = CalculateSunRotation(Progress);
 
@@ -59,10 +59,15 @@ FRotator UFACSunMovement::CalculateSunRotation(float Progress)
 {
 	// Calculate the elevation angle: from 0 at sunrise, to 90 at noon, back to 0 at sunset
 	// We use a sine function for a smooth transition of the sun's elevation angle throughout the day
-	float ElevationAngle = FMath::Asin(FMath::Sin(PI * Progress));
+	float ElevationDegrees;
 
-	// Convert the elevation angle to degrees
-	float ElevationDegrees = FMath::RadiansToDegrees(ElevationAngle);
+	if (Progress <= 0.5f) {
+		// Rising part of the day - scale to [SunriseElevation, 90]
+		ElevationDegrees = FMath::Lerp(SunriseElevation, NoonElevation, FMath::Sin(PI * Progress));
+	} else {
+		// Setting part of the day - scale to [90, SunsetElevation]
+		ElevationDegrees = FMath::Lerp(NoonElevation, SunsetElevation, FMath::Sin(PI * Progress));
+	}
 
 	// Set the azimuth angle: this can be adjusted depending on your game's specific needs
 	// Here, we'll keep it simple with a fixed azimuth, but you could make this dynamic

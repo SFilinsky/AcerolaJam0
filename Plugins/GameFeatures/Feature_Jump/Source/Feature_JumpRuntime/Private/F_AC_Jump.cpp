@@ -1,5 +1,0 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
-#include "F_AC_Jump.h"
-

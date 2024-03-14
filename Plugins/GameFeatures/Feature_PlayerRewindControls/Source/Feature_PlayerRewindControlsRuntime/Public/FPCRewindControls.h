@@ -13,7 +13,7 @@ UCLASS()
 class FEATURE_PLAYERREWINDCONTROLSRUNTIME_API UFPCRewindControls : public UGKActorComponent
 {
 	GENERATED_BODY()
-
+	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
@@ -23,16 +23,50 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void StopRewind();
-
-	float GetTimeModifier(const float BeatsSinceRewindStart);
-
-protected:
+	void HandleRewind();
+	void HandleRewindRecovery();
 
 	/* State */
 
 protected:
 
-	// #define REWIND_NOT_STARED -1
+	/**
+	 * Rewind start
+	 */
+	UPROPERTY(BlueprintReadWrite)
+	float RewindStartDelayFlatBase = 0.5f;
+	
+	UPROPERTY(BlueprintReadWrite)
+	float RewindStartDelayInBeats = 0.5f;
+
+	/**
+	 * Rewind time multiplier
+	 */
+	
+	UPROPERTY(BlueprintReadWrite)
+	float RewindMultiplierExpRatio = 0.5f;
+	
+	UPROPERTY(BlueprintReadWrite)
+	float RewindMultiplierBase = 0.25f;
+	
+	UPROPERTY(BlueprintReadWrite)
+	float RewindMultiplierRatio = 0.25f;
+	
+	/**
+	 * Rewind recovery
+	 */ 
+	UPROPERTY(BlueprintReadWrite)
+	float RewindRecoveryFlatBase = 0.1f;
+	
+	UPROPERTY(BlueprintReadWrite)
+	float RewindRecoveryBeats = 0.5f;
+
+private:
+	
 	float RewindStartTime = NULL;
+	float RewindRecoveryStartTime = NULL;
+
+	FTimerHandle StartRewindTimerHandle;
+	FTimerHandle StopRewindTimerHandle;
 	
 };

@@ -48,6 +48,8 @@ protected:
 
 	/* State */
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float TimeStopIntervalOnLose = 1.0f;
 	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> GoalActorType;
@@ -61,7 +63,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float GameCloseDelayAfterWin = 15.0f;
 
-	FTimerHandle TimerHandle;
+	FTimerHandle LoseTimerHandle;
+	FTimerHandle WinTimerHandle;
 
 	UPROPERTY()
 	UProximity* ProximityDetector;

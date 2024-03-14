@@ -43,11 +43,14 @@ void UFACMouseMovement::MoveToPosition(FVector Position)
 	const auto SideBoostAcceleration = GetSideBoostAcceleration(StartPointTransform, Position, MovedPrimitive->GetPhysicsLinearVelocity());
 	
 	const auto TotalAcceleration = DistanceRatio * (SideBoostAcceleration + DirectionalAcceleration);
+	
+	const float SpeedRatio = FMath::Clamp(MovedPrimitive->GetPhysicsLinearVelocity().Length() / SoftSpeedCap, 0.0f, 1.0f);
+	const auto TotalAccelerationCapped = TotalAcceleration * (1 - SpeedRatio);
 
 
 	// DrawDebugLine(MovedPrimitive->GetWorld(),MovedPrimitive->GetComponentLocation(),MovedPrimitive->GetComponentLocation() + TotalAcceleration / 100, FColor::Green,false, 3.0f, 0, 0.75f);
 	
-	MovedPrimitive->AddForce(TotalAcceleration * MovedPrimitive->GetMass()); // We multiply for mass to get final force value; It will make mass to not impact acceleration at the end.
+	MovedPrimitive->AddForce(TotalAccelerationCapped * MovedPrimitive->GetMass()); // We multiply for mass to get final force value; It will make mass to not impact acceleration at the end.
 
 
 	// Will soften gravity if target point is above current lowest point of actor
