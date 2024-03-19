@@ -17,27 +17,27 @@ void UFPCRewindControls::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UFPCRewindControls::StartRewind()
 {
-	if (RewindRecoveryStartTime != NULL)
+	if (RewindRecoveryStartTime > -1)
 	{
-		RewindRecoveryStartTime = NULL;
+		RewindRecoveryStartTime = -1;
 	}
 
-	RewindStartTime = GetWorld()->GetTimeSeconds();
+	RewindStartTime = GetWorld()->GetRealTimeSeconds();
 }
 
 void UFPCRewindControls::StopRewind()
 {
-	if (RewindStartTime != NULL)
+	if (RewindStartTime > -1)
 	{
-		RewindStartTime = NULL;
+		RewindStartTime = -1;
 	}
 
-	RewindRecoveryStartTime = GetWorld()->GetTimeSeconds();
+	RewindRecoveryStartTime = GetWorld()->GetRealTimeSeconds();
 }
 
 void UFPCRewindControls::HandleRewind()
 {
-	if (RewindStartTime == NULL)
+	if (RewindStartTime == -1)
 	{
 		return;
 	}
@@ -46,19 +46,17 @@ void UFPCRewindControls::HandleRewind()
 	checkSlow(World);
 	
 	const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
-	const auto BeatSubsystem = World->GetSubsystem<UBeatSubsystem>();
 
 	const auto TimeNow = World->GetRealTimeSeconds();
 	const auto TimePassed = TimeNow - RewindStartTime;
-	const auto BeatsPassed = BeatSubsystem->TimeDeltaToBeat(TimePassed);
 
 	float TimeMultiplier;
-	if (BeatsPassed < RewindStartDelayInBeats)
+	if (TimePassed < RewindStartDelayInSeconds)
 	{
-		const auto PartPassed = FMath::Clamp(BeatsPassed / RewindStartDelayInBeats, 0, 1);
-		TimeMultiplier =  FMath::Lerp(1, RewindStartDelayFlatBase,  PartPassed);
+		const auto PartPassed = FMath::Clamp(TimePassed / RewindStartDelayInSeconds, 0, 1);
+		TimeMultiplier = FMath::Lerp(1, RewindStartDelayFlatBase,  PartPassed);
 	} else {
-		TimeMultiplier = -1.0 * (RewindMultiplierBase + FMath::Pow(RewindMultiplierRatio * BeatsPassed, RewindMultiplierExpRatio));
+		TimeMultiplier = -1.0 * (RewindMultiplierBase + FMath::Pow(RewindMultiplierRatio * TimePassed, RewindMultiplierExpRatio));
 	}
 			
 	TimeSubsystem->SetTimeModifier(TimeMultiplier);
@@ -66,7 +64,7 @@ void UFPCRewindControls::HandleRewind()
 
 void UFPCRewindControls::HandleRewindRecovery()
 {
-	if (RewindRecoveryStartTime == NULL)
+	if (RewindRecoveryStartTime == -1)
 	{
 		return;
 	}
@@ -75,18 +73,16 @@ void UFPCRewindControls::HandleRewindRecovery()
     checkSlow(World);
 
     const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
-    const auto BeatSubsystem = World->GetSubsystem<UBeatSubsystem>();
 	
 	const auto TimeNow = World->GetRealTimeSeconds();
 	const auto TimePassed = TimeNow - RewindRecoveryStartTime;
-	const auto BeatsPassed = BeatSubsystem->TimeDeltaToBeat(TimePassed);
-	const auto PartPassed = FMath::Clamp(BeatsPassed / RewindRecoveryBeats, 0, 1);
+	const auto PartPassed = FMath::Clamp(TimePassed / RewindRecoverySeconds, 0, 1);
 			
 	const auto TimeModifier = FMath::Lerp(RewindRecoveryFlatBase, 1, PartPassed);
 	TimeSubsystem->SetTimeModifier(TimeModifier);
 
-	if (BeatsPassed >= RewindRecoveryBeats)
+	if (TimePassed >= RewindRecoverySeconds)
 	{
-		RewindRecoveryStartTime = NULL;
+		RewindRecoveryStartTime = -1;
 	}
 }

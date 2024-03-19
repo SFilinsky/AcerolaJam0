@@ -299,7 +299,7 @@ void UGKInterfaceSubsystem::TriggerHandlersForInterface(const AActor* Receiver, 
 		return;
 	}
 
-	for (const auto Elem : InterfaceToExtensionHandlerMap)
+	for (const auto& Elem : InterfaceToExtensionHandlerMap)
 	{
 
 		const auto MapInterface = Elem.Key.InterfaceClass;

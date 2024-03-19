@@ -8,27 +8,6 @@
 
 USCPositionConfigurator::USCPositionConfigurator()
 {
-	// for(int32 i = 0; i < NumberOfPositions; i++)
-	// {
-	// 	// Construct a name for each point
-	// 	FName PointName = *FString::Printf(TEXT("Position %d"), i);
-	// 	USceneComponent* NewPoint = CreateDefaultSubobject<USceneComponent>(PointName);
-	//
-	// 	// Set relative location if necessary or leave it to be positioned in editor
-	// 	NewPoint->SetRelativeLocation(FVector::ZeroVector);
-	// 	NewPoint->SetRelativeRotation(FRotator::ZeroRotator);
-	//
-	// 	// Setup the point's attachment to the component
-	// 	NewPoint->SetupAttachment(this);
-	// 	// if (!NewPoint->IsRegistered())
-	// 	// {
-	// 	// 	NewPoint->RegisterComponent();
-	// 	// }
-	// 	// NewPoint->SetVisibility(true);
-	//
-	// 	// Add the new point to the array
-	// 	Positions.Add(NewPoint);
-	// }
 }
 
 TArray<FTransform> USCPositionConfigurator::GetConfiguredPositions()
@@ -65,21 +44,21 @@ void USCPositionConfigurator::PostLoad()
 	#endif	
 }
 
-	#if WITH_EDITOR
-void USCPositionConfigurator::PostEditComponentMove(bool bFinished)
-{
-	Super::PostEditComponentMove(bFinished);
-}
-
-void USCPositionConfigurator::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
-{
-	Super::PostEditChangeProperty(PropertyChangedEvent);
-	
-	if (PropertyChangedEvent.Property && PropertyChangedEvent.Property->GetFName() == GET_MEMBER_NAME_CHECKED(USCPositionConfigurator, NumberOfPositions))
+#if WITH_EDITOR
+	void USCPositionConfigurator::PostEditComponentMove(bool bFinished)
 	{
-		UpdatePositionComponents();
+		Super::PostEditComponentMove(bFinished);
 	}
-}
+
+	void USCPositionConfigurator::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+	{
+		Super::PostEditChangeProperty(PropertyChangedEvent);
+		
+		if (PropertyChangedEvent.Property && PropertyChangedEvent.Property->GetFName() == GET_MEMBER_NAME_CHECKED(USCPositionConfigurator, NumberOfPositions))
+		{
+			UpdatePositionComponents();
+		}
+	}
 #endif
 
 void USCPositionConfigurator::UpdatePositionComponents()
@@ -192,5 +171,5 @@ FName USCPositionConfigurator::GetPositionComponentName(const int32 Index)
 		const auto CacheId = GetUniquePositionComponentID(Index);
 		TransformCache.Add(CacheId, Transform);
 	}
-#endif
 
+#endif

@@ -43,11 +43,11 @@ void UFGMClouds::SpawnObjects()
 		const auto DirectionShiftRatioY = FMath::FRand() / 4;
 		const FCloudLifetimeInfo CloudInfo = {
 			.LifetimeShift = FMath::FRand() * LifetimeCycleDuration,
-			.StartPosition = FVector({
+			.StartPosition = FVector(
 				FMath::FRandRange(XMin, XMax),
 				FMath::FRandRange(YMin, YMax),
-				FMath::FRandRange(ZMin, ZMax),
-			}),
+				FMath::FRandRange(ZMin, ZMax)
+			),
 			.Speed = FVector(
 					DirectionShiftRatioX * Direction.X,
 					DirectionShiftRatioY * Direction.Y,

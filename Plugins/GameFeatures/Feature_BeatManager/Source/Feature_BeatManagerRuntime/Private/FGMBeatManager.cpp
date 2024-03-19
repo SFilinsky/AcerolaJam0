@@ -45,13 +45,13 @@ void UFGMBeatManager::TriggerEvents()
 	const auto BeatInfo = BeatSubsystem->GetCurrentBeatInfo();
 	
 	const auto EventInstances = InterfaceSubsystem->GetInterfaceClassInstances(ULevelEventBase::StaticClass());
-	for (const auto EventToActivate : EventInstances)
+	for (const auto& EventToActivate : EventInstances)
 	{
 		const auto LevelEvent = Cast<ULevelEventBase>(EventToActivate);
 		checkSlow(LevelEvent);
 
 		const auto EventUpdateInformationList = LevelEvent->HandleUpdate(BeatInfo);
-		for (const auto EventUpdateInformation : EventUpdateInformationList)
+		for (const auto& EventUpdateInformation : EventUpdateInformationList)
 		{
 			EventQueueSubsystem->EnqueueEvent(EventUpdateInformation);
 		}

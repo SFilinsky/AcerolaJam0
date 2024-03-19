@@ -37,7 +37,7 @@ protected:
 	float RewindStartDelayFlatBase = 0.5f;
 	
 	UPROPERTY(BlueprintReadWrite)
-	float RewindStartDelayInBeats = 0.5f;
+	float RewindStartDelayInSeconds = 0.25f;
 
 	/**
 	 * Rewind time multiplier
@@ -59,12 +59,12 @@ protected:
 	float RewindRecoveryFlatBase = 0.1f;
 	
 	UPROPERTY(BlueprintReadWrite)
-	float RewindRecoveryBeats = 0.5f;
+	float RewindRecoverySeconds = 0.25f;
 
 private:
 	
-	float RewindStartTime = NULL;
-	float RewindRecoveryStartTime = NULL;
+	float RewindStartTime = -1;
+	float RewindRecoveryStartTime = -1;
 
 	FTimerHandle StartRewindTimerHandle;
 	FTimerHandle StopRewindTimerHandle;

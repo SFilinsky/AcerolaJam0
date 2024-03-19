@@ -23,7 +23,7 @@ void UEventQueueSubsystem::EnqueueEvent(const FEventUpdateInformation& EventUpda
 void UEventQueueSubsystem::ExecuteCategoryQueue(const EEventCategory Category)
 {
 	const auto EventQueue = EventQueueMap.FindOrAdd(Category);
-	for (const auto Event : EventQueue)
+	for (const auto& Event : EventQueue)
 	{
 		Event();
 	}
