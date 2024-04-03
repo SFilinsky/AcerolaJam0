@@ -44,8 +44,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	UMaterialInstance* EyeMaterial;
 	
-	UPROPERTY(EditDefaultsOnly)
-	float TrackingSpeed = 0.15f;
+	UPROPERTY(BlueprintReadWrite)
+	float TrackingIntervalSeconds = 0.15f;
 	
 	UPROPERTY()
 	UInterpolatorFloat* RotationInterpolator;

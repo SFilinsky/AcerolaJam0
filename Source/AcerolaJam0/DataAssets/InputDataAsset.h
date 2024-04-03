@@ -73,6 +73,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Speed Effects")
 	float CameraEffects_InterpolationDelay = 0.3f;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Eye Tracking")
+	float EyeTracking_TrackingIntervalSeconds = 0.5f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jump")
 	float Jump_ImpulsePerKg = 1000.f;

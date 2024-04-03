@@ -13,7 +13,7 @@ void UFACEyeTracking::BeginPlay()
 	RotationInterpolator = NewObject<UInterpolatorFloat>(this);
 	RotationInterpolator->SetCurrentValue(0);
 	RotationInterpolator->SetCurrentValue(0);
-	RotationInterpolator->SetInterpolationInterval(TrackingSpeed);
+	RotationInterpolator->SetInterpolationInterval(TrackingIntervalSeconds);
 	
 	const auto EyesComponent = GetEyesComponent();
 	if (!ensure(EyesComponent != nullptr))
@@ -55,7 +55,7 @@ void UFACEyeTracking::EditorWatch_Implementation()
 	RotationInterpolator = NewObject<UInterpolatorFloat>(this);
 	RotationInterpolator->SetCurrentValue(0);
 	RotationInterpolator->SetCurrentValue(0);
-	RotationInterpolator->SetInterpolationInterval(TrackingSpeed);
+	RotationInterpolator->SetInterpolationInterval(TrackingIntervalSeconds);
 	
 	const auto EyesComponent = GetEyesComponent();
 	if (!ensure(EyesComponent != nullptr))
