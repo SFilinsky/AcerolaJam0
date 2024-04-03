@@ -21,6 +21,11 @@ struct FGKTimerHandle
 		: Handle(NewHandle)
 	{}
 
+	bool IsValid() const
+	{
+		return Handle != 0;
+	}
+
 	bool operator==(const FGKTimerHandle& Other) const
 	{
 		return Handle == Other.Handle;
@@ -63,8 +68,10 @@ public:
 	TFunction<bool()> ClearCallback;
 	float Interval = 0;
 	bool bLoop = false;
+	float InitialDelay = 0;
 
 	bool bPaused = false;
+	bool bInitialDelayPassed = false;
 	float AccumulatedTime = 0;
 };
 
@@ -90,7 +97,7 @@ class GAMEPLAYKIT_API UGKTimerManager : public UObject
 
 public:
 
-	const FGKTimerHandle SetTimer(const TFunction<void()>& Callback, float Interval, bool bLoop);
+	const FGKTimerHandle SetTimer(const TFunction<void()>& Callback, float Interval, bool bLoop, float InitialDelay);
 	void PauseTimer(const FGKTimerHandle& TimerHandle);
 	void ResumeTimer(const FGKTimerHandle& TimerHandle);
 	void ClearTimer(const FGKTimerHandle& TimerHandle);

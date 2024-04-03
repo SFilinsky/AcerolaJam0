@@ -3,86 +3,85 @@
 
 #include "FPCRewindControls.h"
 
-#include "BeatSubsystem.h"
 #include "LevelTimeSubsystem.h"
+#include "GameplayKit/Timers/GKWorldTimerSubsystem.h"
 
 void UFPCRewindControls::TickComponent(float DeltaTime, ELevelTick TickType,
                                        FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	HandleRewind();
-	HandleRewindRecovery();
 }
 
 void UFPCRewindControls::StartRewind()
 {
-	if (RewindRecoveryStartTime > -1)
+	const auto WorldTimerSubsystem = GetWorld()->GetSubsystem<UGKWorldTimerSubsystem>();
+	
+	if (HandleRewindRecoveryTimer != NULL)
 	{
-		RewindRecoveryStartTime = -1;
+		WorldTimerSubsystem->ClearTimer(HandleRewindRecoveryTimer);
+		HandleRewindRecoveryTimer = NULL;
 	}
 
-	RewindStartTime = GetWorld()->GetRealTimeSeconds();
+	const auto RewindStartTime = GetWorld()->GetRealTimeSeconds();
+	HandleRewindStartTimer = WorldTimerSubsystem->SetTimer(
+		[ RewindStartTime, this ]()
+		{
+			const auto World = GetWorld();
+			
+			const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
+
+			const auto TimeNow = World->GetRealTimeSeconds();
+			const auto TimePassed = TimeNow - RewindStartTime;
+
+			float TimeMultiplier;
+			if (TimePassed < RewindStartDelayInSeconds)
+			{
+				const auto PartPassed = FMath::Clamp(TimePassed / RewindStartDelayInSeconds, 0, 1);
+				TimeMultiplier = FMath::Lerp(1, RewindStartDelayFlatBase,  PartPassed);
+			} else {
+				TimeMultiplier = -1.0 * (RewindMultiplierBase + FMath::Pow(RewindMultiplierRatio * TimePassed, RewindMultiplierExpRatio));
+			}
+					
+			TimeSubsystem->SetTimeModifier(TimeMultiplier);
+		},
+		0.016,
+		true
+	);
 }
 
 void UFPCRewindControls::StopRewind()
 {
-	if (RewindStartTime > -1)
-	{
-		RewindStartTime = -1;
-	}
-
-	RewindRecoveryStartTime = GetWorld()->GetRealTimeSeconds();
-}
-
-void UFPCRewindControls::HandleRewind()
-{
-	if (RewindStartTime == -1)
-	{
-		return;
-	}
-
-	const auto World = GetWorld();
-	checkSlow(World);
+	const auto WorldTimerSubsystem = GetWorld()->GetSubsystem<UGKWorldTimerSubsystem>();
 	
-	const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
-
-	const auto TimeNow = World->GetRealTimeSeconds();
-	const auto TimePassed = TimeNow - RewindStartTime;
-
-	float TimeMultiplier;
-	if (TimePassed < RewindStartDelayInSeconds)
+	if (HandleRewindStartTimer != NULL)
 	{
-		const auto PartPassed = FMath::Clamp(TimePassed / RewindStartDelayInSeconds, 0, 1);
-		TimeMultiplier = FMath::Lerp(1, RewindStartDelayFlatBase,  PartPassed);
-	} else {
-		TimeMultiplier = -1.0 * (RewindMultiplierBase + FMath::Pow(RewindMultiplierRatio * TimePassed, RewindMultiplierExpRatio));
+		WorldTimerSubsystem->ClearTimer(HandleRewindStartTimer);
+		HandleRewindStartTimer = NULL;
 	}
+
+	const auto RecoveryStartTime = GetWorld()->GetRealTimeSeconds();
+	HandleRewindRecoveryTimer = WorldTimerSubsystem->SetTimer(
+		[ RecoveryStartTime, this ]()
+		{
+			const auto World = GetWorld();
 			
-	TimeSubsystem->SetTimeModifier(TimeMultiplier);
-}
-
-void UFPCRewindControls::HandleRewindRecovery()
-{
-	if (RewindRecoveryStartTime == -1)
-	{
-		return;
-	}
+			const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
 	
-	const auto World = GetWorld();
-    checkSlow(World);
+			const auto TimeNow = World->GetRealTimeSeconds();
+			const auto TimePassed = TimeNow - RecoveryStartTime;
+			const auto PartPassed = FMath::Clamp(TimePassed / RewindRecoverySeconds, 0, 1);
+					
+			const auto TimeModifier = FMath::Lerp(RewindRecoveryFlatBase, 1, PartPassed);
+			TimeSubsystem->SetTimeModifier(TimeModifier);
 
-    const auto TimeSubsystem = World->GetSubsystem<ULevelTimeSubsystem>();
-	
-	const auto TimeNow = World->GetRealTimeSeconds();
-	const auto TimePassed = TimeNow - RewindRecoveryStartTime;
-	const auto PartPassed = FMath::Clamp(TimePassed / RewindRecoverySeconds, 0, 1);
-			
-	const auto TimeModifier = FMath::Lerp(RewindRecoveryFlatBase, 1, PartPassed);
-	TimeSubsystem->SetTimeModifier(TimeModifier);
-
-	if (TimePassed >= RewindRecoverySeconds)
-	{
-		RewindRecoveryStartTime = -1;
-	}
+			if (TimePassed >= RewindRecoverySeconds)
+			{
+				const auto WorldTimerSubsystem = GetWorld()->GetSubsystem<UGKWorldTimerSubsystem>();
+				WorldTimerSubsystem->ClearTimer(HandleRewindRecoveryTimer);
+				HandleRewindRecoveryTimer = NULL;
+			}
+		},
+		0.016,
+		true
+	);
 }

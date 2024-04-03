@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GKActorComponent.h"
+#include "GameplayKit/Timers/GKTimerManager.h"
 #include "FPCRewindControls.generated.h"
 
 /**
@@ -23,8 +24,6 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void StopRewind();
-	void HandleRewind();
-	void HandleRewindRecovery();
 
 	/* State */
 
@@ -63,10 +62,7 @@ protected:
 
 private:
 	
-	float RewindStartTime = -1;
-	float RewindRecoveryStartTime = -1;
-
-	FTimerHandle StartRewindTimerHandle;
-	FTimerHandle StopRewindTimerHandle;
+	FGKTimerHandle HandleRewindStartTimer = NULL;
+	FGKTimerHandle HandleRewindRecoveryTimer = NULL;
 	
 };
